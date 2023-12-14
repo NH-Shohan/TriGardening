@@ -19,5 +19,5 @@ export class ProductEntity {
   stock: number;
 
   @Column({ nullable: true })
-  photo: string;
+  photos: string;
 }

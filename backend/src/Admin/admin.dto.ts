@@ -59,7 +59,7 @@ export class CreateProductDto {
   stock: number;
 
   @IsOptional()
-  photo?: string;
+  photos?: string[];
 }
 
 // update-product.dto.ts
