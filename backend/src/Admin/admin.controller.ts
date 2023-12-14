@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post, Put, Req, Res, Session, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req, Res, Session, UploadedFile, UploadedFiles, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateProductDto, LoginDTO, UpdateProductDto, signUpDTO } from './admin.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminService } from './admin.service';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from "multer";
 
 @Controller('Admin')
@@ -39,9 +39,8 @@ export class AdminController {
 
 
   @Post('addproducts')
-  
   @UseInterceptors(
-    FileInterceptor('photo', {
+    FilesInterceptor('photos', 5, {
       fileFilter: (req, file, cb) => {
         if (file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
           cb(null, true);
@@ -61,13 +60,10 @@ export class AdminController {
       }),
     }),
   )
-  
-  @UsePipes(new ValidationPipe())
-  async addProduct(@Body() createProductDto: CreateProductDto, @UploadedFile() photo: Express.Multer.File) {
-    // Attach the uploaded image to the DTO
-    createProductDto.photo = photo.filename;
-    createProductDto.price = +createProductDto.price;
-    createProductDto.stock = +createProductDto.stock;
+  //@UsePipes(new ValidationPipe())
+  async addProduct(@Body() createProductDto: CreateProductDto, @UploadedFiles() photos: Express.Multer.File[]) {
+    // Attach the uploaded images to the DTO
+    createProductDto.photos = photos.map(photo => photo.filename);
     console.log('Received data:', createProductDto);
     return this.adminService.addProduct(createProductDto);
   }

@@ -86,9 +86,25 @@ export class AdminService {
 
 
   async addProduct(createProductDto: CreateProductDto): Promise<ProductEntity> {
-    const product = this.productRepository.create(createProductDto);
-    return await this.productRepository.save(product);
+    const product = new ProductEntity();
+    // Map properties from DTO to the entity
+    product.name = createProductDto.name;
+    product.description = createProductDto.description;
+    product.price = createProductDto.price;
+    product.stock = createProductDto.stock;
+    product.photos = JSON.stringify(createProductDto.photos); // Serialize array to JSON // Assuming photos is an array
+
+    // Save the product to the database
+    const savedProduct = await this.productRepository.save(product);
+    return savedProduct;
   }
+
+  // async getProduct(productId: number): Promise<Product | undefined> {
+  //   return this.productRepository.findOne(productId);
+  // }
+
+  // Implement other business logic for your product service as needed
+
 
   async updateProduct(productId: number, updateProductDto: UpdateProductDto): Promise<ProductEntity> {
     const product = await this.productRepository.findOne({ where: { id: productId } });
