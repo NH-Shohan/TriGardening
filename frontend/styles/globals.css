@@ -7,7 +7,10 @@
 
 /* Design Style */
 .gradient {
-  background: linear-gradient(to right, #009900, #007700);
+  background: linear-gradient(to right bottom, #009900, #007700);
+}
+.gradient:hover {
+  background: linear-gradient(to left top, #009900, #007700);
 }
 h1 {
   font-size: 96px;
@@ -27,6 +30,7 @@ h4 {
 }
 Body {
   font-size: 20px;
+  color: #363636;
 }
 .body-bold {
   font-size: 20px;
@@ -45,4 +49,20 @@ Body {
 }
 .shadow-inside {
   box-shadow: 0px 0px 10px 0px #0079004d inset;
+}
+/* Custom Background */
+.background {
+  background: radial-gradient(
+    63.97% 52.76% at 33.17% 50%,
+    #fbfbfb 0%,
+    #cfff90 100%
+  );
+  position: absolute;
+}
+.bg-auth {
+  background-image: url("/authBackground.svg");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: cover;
+  position: absolute;
 }
