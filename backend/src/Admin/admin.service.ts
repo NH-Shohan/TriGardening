@@ -110,6 +110,8 @@ export class AdminService {
     const product = await this.productRepository.findOne({ where: { id: productId } });
 
     if (!product) {
+      
+      
       throw new UnauthorizedException(`Product with ID ${productId} not found`);
     }
 
