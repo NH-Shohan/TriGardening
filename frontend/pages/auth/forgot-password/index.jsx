@@ -1,7 +1,7 @@
+import BackButton from "@/components/BackButton";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function ForgotPassword() {
   return (
@@ -14,8 +14,8 @@ export default function ForgotPassword() {
       </p>
 
       <Input
-        label="Email"
-        type="email"
+        label="Email / Phone Number"
+        type="text"
         placeholder="Enter an email"
         className={"w-[406px] my-10"}
       />
@@ -26,15 +26,11 @@ export default function ForgotPassword() {
         href="/auth/forgot-password/check-email"
       />
 
-      <Link href="/auth/sign-in" className="body-small-bold flex gap-2 mt-10">
-        <Image
-          src="./../../../back-arrow.svg"
-          alt="key icon"
-          width={16}
-          height={16}
-        />
-        Back to Login
-      </Link>
+      <BackButton
+        className={"mt-10"}
+        text={"Back to Login"}
+        path={"/auth/sign-in"}
+      />
     </div>
   );
 }

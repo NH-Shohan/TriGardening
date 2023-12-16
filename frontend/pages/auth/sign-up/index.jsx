@@ -64,7 +64,7 @@ export default function SignUp() {
               </div>
             </div>
 
-            <Button text="Sign up" className="mt-7" />
+            <Button text="Sign up" className="mt-7" href="/auth/otp" />
 
             <div className="flex gap-1 mt-2">
               <p className="body-small">Already have an account?</p>

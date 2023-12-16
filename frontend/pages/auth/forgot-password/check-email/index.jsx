@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import Button from "@/components/Button";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +19,11 @@ export default function CheckEmail() {
       </p>
       <p className="body-bold text-black">example@gmail.com</p>
 
-      <Button text="Open email app" className="w-[406px] mt-10" />
+      <Button
+        text="Open email app"
+        href="/auth/forgot-password/set-new-password"
+        className="w-[406px] mt-10"
+      />
 
       <div className="flex my-10 items-center gap-1">
         <p className="body-small-bold text-gray">Didn't receive the email?</p>
@@ -27,15 +32,7 @@ export default function CheckEmail() {
         </Link>
       </div>
 
-      <Link href="/auth/sign-in" className="body-small-bold flex gap-2">
-        <Image
-          src="./../../../back-arrow.svg"
-          alt="key icon"
-          width={16}
-          height={16}
-        />
-        Back to Login
-      </Link>
+      <BackButton text={"Back to Login"} path={"/auth/sign-in"} />
     </div>
   );
 }
