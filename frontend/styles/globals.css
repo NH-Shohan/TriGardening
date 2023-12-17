@@ -2,26 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Design Style */
+.gradient {
+  background: linear-gradient(to right bottom, #009900, #007700);
+}
+.gradient:hover {
+  background: linear-gradient(to left top, #009900, #007700);
+}
+h1 {
+  font-size: 96px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 64px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 48px;
+  font-weight: 700;
+}
+h4 {
+  font-size: 36px;
+  font-weight: 700;
+}
+Body {
+  font-size: 20px;
+  color: #363636;
+}
+.body-bold {
+  font-size: 20px;
+  font-weight: 700;
+}
+.body-small {
+  font-size: 16px;
+}
+.body-small-bold {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.shadow {
+  box-shadow: 0px 0px 15px 0px #00000040;
+}
+.shadow-inside {
+  box-shadow: 0px 0px 10px 0px #0079004d inset;
+}
+/* Custom Background */
+.background {
+  background: radial-gradient(
+    63.97% 52.76% at 33.17% 50%,
+    #fbfbfb 0%,
+    #cfff90 100%
+  );
+  position: absolute;
+}
+.bg-auth {
+  background-image: url("/authBackground.svg");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: cover;
+  position: absolute;
 }
