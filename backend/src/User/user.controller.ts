@@ -23,7 +23,7 @@ export class UserController {
   async login(@Body() data: LoginDTO, @Session() session) {
     const user = await this.userService.login(data);
     console.log(user);
-  
+    
     if (user) {
       const identifier = user.email ? user.email : user.phone;
      // session.email = user.email; // Store email in the session if available
