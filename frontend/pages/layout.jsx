@@ -7,8 +7,9 @@ export default function Layout({ children }) {
   return (
     <>
       <main className={`${glegoo.className}`}>
-        <Navbar/>
-        {children}</main>
+        <Navbar />
+        {children}
+      </main>
     </>
   );
 }

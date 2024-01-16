@@ -1,23 +1,20 @@
-import React from 'react'
-import Link from 'next/link';
-import Image from 'next/image';
-import logoPic from '../public/logo 1.svg';
+import Image from "next/image";
+import Link from "next/link";
+import logoPic from "../public/logo 1.svg";
+
 const Navbar = () => {
   return (
     <div>
-      <Image
-      src={logoPic}
-      alt="Logo Picture"
-    />
+      <Image src={logoPic} alt="Logo Picture" />
       <Link href="/">Home</Link>
-      <Link href="/allplants">All Plants</Link>
-      <Link href="/aboutus">About Us</Link>
-      <Link href="/blog">Blog</Link>
+      <Link href="/allPlants">All Plants</Link>
+      <Link href="/aboutUs">About Us</Link>
+      <Link href="/blogs">Blogs</Link>
       <Link href="/buy">Buy</Link>
-      <Link href="/contactus">Contact Us</Link>
+      <Link href="/contactUs">Contact Us</Link>
       <Link href="/auth/sign-in">Login</Link>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Navbar
+export default Navbar;

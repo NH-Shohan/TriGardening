@@ -1,9 +1,5 @@
-import React from 'react'
-
 const Buy = () => {
-  return (
-    <div>Buy</div>
-  )
-}
+  return <div>Buy</div>;
+};
 
-export default Buy
+export default Buy;
