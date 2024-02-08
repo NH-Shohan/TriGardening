@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function Button({ text, className, href }) {
+export default function Button({ text, className, href }) {
   return (
     <div className={`${className}`}>
       <Link href={href ? href : ""}>
@@ -14,5 +14,3 @@ function Button({ text, className, href }) {
     </div>
   );
 }
-
-export default Button;

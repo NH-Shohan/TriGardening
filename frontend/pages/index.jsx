@@ -1,9 +1,11 @@
-import Link from "next/link";
+import HomeCard from "@/components/HomeCard";
+import HomeFirst from "@/components/HomeFirst";
 
 export default function Home() {
   return (
-    <main className="h-screen w-screen">
-      <Link href="/auth/sign-in">Sign In</Link>
+    <main className="">
+      <HomeFirst></HomeFirst>
+      <HomeCard></HomeCard>
     </main>
   );
 }

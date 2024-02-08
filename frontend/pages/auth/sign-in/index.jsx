@@ -1,7 +1,7 @@
-import Button from "@/components/Button";
-import Input from "@/components/Input";
 import Image from "next/image";
 import Link from "next/link";
+import Button from "../../../components/Button";
+import Input from "../../../components/Input";
 
 export default function SignIn() {
   return (
@@ -35,9 +35,7 @@ export default function SignIn() {
                 />
                 <label htmlFor="checkbox">Remember me</label>
                 <svg
-                  className={`absolute 
-                  w-4 h-3
-                  hidden peer-checked:block`}
+                  className={`absolute w-4 h-3 hidden peer-checked:block`}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -62,7 +60,10 @@ export default function SignIn() {
 
             <div className="flex gap-1 mt-2">
               <p className="body-small">Don't have an account?</p>
-              <Link href="/auth/sign-up" className="body-small-bold text-primary">
+              <Link
+                href="/auth/sign-up"
+                className="body-small-bold text-primary"
+              >
                 Sign up
               </Link>
             </div>
