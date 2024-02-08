@@ -7,7 +7,7 @@ const glegoo = Glegoo({ subsets: ["latin"], weight: ["400", "700"] });
 export default function Layout({ children }) {
   return (
     <>
-      <main className={`${glegoo.className}`}>
+      <main className={`bg-white ${glegoo.className}`}>
         <Navbar />
         {children}
         <Footer></Footer>
