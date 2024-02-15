@@ -6,7 +6,7 @@ export default function Button({ children, className, href, outline }) {
       {outline ? (
         <Link href={href ? href : ""}>
           <button
-            className={`w-full body-bold text-center py-2 text-primary rounded-lg hover:transition-all body-small border border-primary hover:bg-primary hover:text-white transition ${className}`}
+            className={`body-bold text-center py-3 text-primary rounded-lg hover:transition-all body-small border border-primary hover:bg-primary hover:text-white transition ${className}`}
             type="button"
           >
             {children}
@@ -15,7 +15,7 @@ export default function Button({ children, className, href, outline }) {
       ) : (
         <Link href={href ? href : ""}>
           <button
-            className={`gradient w-full body-bold text-center py-2 text-light rounded-lg hover:transition-all body-small`}
+            className={`gradient w-full body-bold text-center py-3 text-light rounded-lg hover:transition-all body-small`}
             type="button"
           >
             {children}

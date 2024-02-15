@@ -1,10 +1,25 @@
 import Image from "next/image";
+import { useState } from "react";
 import { BsCart4 } from "react-icons/bs";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Button from "./Button";
 
 const Card = ({ image, title, avilable, in_stock, description }) => {
+  const [favorite, setFavorite] = useState();
+
   return (
-    <div className="rounded-3xl border border-gray-light bg-[#fff] hover:shadow-[inset_0_0px_10px_0px_rgba(0,122,0,0.302)] hover:bg-light">
+    <div className="rounded-3xl border border-gray-light bg-[#fff] hover:shadow-[inset_0_0px_10px_0px_rgba(0,122,0,0.302)] hover:bg-light relative">
+      <div
+        className="absolute top-5 right-5 z-50"
+        onClick={() => setFavorite(!favorite)}
+      >
+        {!favorite ? (
+          <FaRegHeart className="text-red text-3xl cursor-pointer" />
+        ) : (
+          <FaHeart className="text-red text-3xl cursor-pointer" />
+        )}
+      </div>
+
       <div className="relative m-3">
         <Image
           className="rounded-t-3xl"
