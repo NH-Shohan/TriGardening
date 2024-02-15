@@ -1,11 +1,12 @@
-import HeroSection from "@/components/HeroSection";
-import HomeCard from "@/components/HomeCard";
+import HeroSection from "@/pages/home/HeroSection";
+import HomeCard from "@/pages/home/HomeCard";
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <HeroSection />
-      <HomeCard></HomeCard>
+      <div className="my-20"></div>
+      <HomeCard />
     </main>
   );
 }

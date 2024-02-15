@@ -42,21 +42,20 @@ export default function OTP() {
       </div>
 
       <Button
-        text="Reset Password"
         className="w-[406px] mt-5"
         href="/auth/forgot-password/success-reset"
-      />
+      >
+        Reset Password
+      </Button>
 
       <div className="flex body-small mt-5 gap-2 text-gray">
         <p>Enter the code, you have in</p>
         <p className="body-small-bold text-primary">4:37 min</p>
       </div>
 
-      <BackButton
-        className={"mt-5"}
-        text={"Back to Login"}
-        path={"/auth/sign-in"}
-      />
+      <BackButton className={"mt-5"} path={"/auth/sign-in"}>
+        Back to Login
+      </BackButton>
 
       <div className="flex body-small-bold mt-20 gap-2 text-gray">
         <p>Didn't receive the email?</p>

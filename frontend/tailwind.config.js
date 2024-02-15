@@ -18,6 +18,7 @@ module.exports = {
         black: "#363636",
         gray: "#696969",
         red: "#EE2B2B",
+        "gray-light": "#EEEEEE",
         "red-light": "#FFCCCC",
       },
     },

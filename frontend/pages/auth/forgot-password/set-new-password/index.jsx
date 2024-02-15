@@ -35,16 +35,15 @@ export default function SetNewPassword() {
       </p>
 
       <Button
-        text="Reset Password"
         className="w-[406px] mt-5"
         href="/auth/forgot-password/success-reset"
-      />
+      >
+        Reset Password
+      </Button>
 
-      <BackButton
-        className={"mt-10"}
-        text={"Back to Login"}
-        path={"/auth/sign-in"}
-      />
+      <BackButton className={"mt-10"} path={"/auth/sign-in"}>
+        Back to Login
+      </BackButton>
     </div>
   );
 }

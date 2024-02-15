@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "./Button";
+import Button from "../../components/Button";
 
 const HeroSection = () => {
   return (
@@ -15,7 +15,9 @@ const HeroSection = () => {
           elit sed risus.
         </p>
 
-        <Button text={"See Plants"} href="/allplants" className="w-1/4" />
+        <Button href="/allplants" className="w-1/4">
+          See Plants
+        </Button>
       </div>
 
       <Image

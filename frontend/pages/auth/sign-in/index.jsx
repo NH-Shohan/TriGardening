@@ -5,9 +5,9 @@ import Input from "../../../components/Input";
 
 export default function SignIn() {
   return (
-    <main className="h-screen w-screen background">
-      <div className="h-screen w-screen bg-auth">
-        <div className="w-screen h-screen flex justify-center items-center">
+    <main className="h-[calc(100vh-70px)] w-full background">
+      <div className="h-[calc(100vh-70px)] w-full bg-auth">
+        <div className="h-[calc(100vh-70px)] flex justify-center items-center">
           <div className="bg-[#0077004D] w-[486px] rounded-2xl p-10 shadow-inside backdrop-blur-[25px]">
             <h4 className="text-primary text-center mb-8">Sign in</h4>
 
@@ -56,7 +56,7 @@ export default function SignIn() {
               </Link>
             </div>
 
-            <Button text="Sign in" className="mt-7" />
+            <Button className="mt-7">Sign in</Button>
 
             <div className="flex gap-1 mt-2">
               <p className="body-small">Don't have an account?</p>

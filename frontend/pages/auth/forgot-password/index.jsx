@@ -20,17 +20,13 @@ export default function ForgotPassword() {
         className={"w-[406px] my-10"}
       />
 
-      <Button
-        text="Reset Password"
-        className="w-[406px]"
-        href="/auth/forgot-password/check-email"
-      />
+      <Button className="w-[406px]" href="/auth/forgot-password/check-email">
+        Reset Password
+      </Button>
 
-      <BackButton
-        className={"mt-10"}
-        text={"Back to Login"}
-        path={"/auth/sign-in"}
-      />
+      <BackButton className={"mt-10"} path={"/auth/sign-in"}>
+        Back to Login
+      </BackButton>
     </div>
   );
 }

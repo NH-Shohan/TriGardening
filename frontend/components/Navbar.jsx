@@ -8,7 +8,7 @@ const Navbar = () => {
   const path = usePathname();
 
   return (
-    <div className="h-[70px] shadow flex justify-center items-center">
+    <div className="h-[70px] shadow flex justify-center items-center sticky">
       <nav className="flex justify-between items-center container mx-auto">
         <Link href={"/"}>
           <div className="w-[50px] m-2 flex gap-1">
@@ -89,7 +89,9 @@ const Navbar = () => {
         </div>
 
         <div>
-          <Button className={"w-[120px]"} href="/auth/sign-in" text={"Login"} />
+          <Button className={"w-[120px]"} href="/auth/sign-in">
+            Login
+          </Button>
         </div>
       </nav>
     </div>

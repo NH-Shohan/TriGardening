@@ -20,10 +20,11 @@ export default function CheckEmail() {
       <p className="body-bold text-black">example@gmail.com</p>
 
       <Button
-        text="Open email app"
         href="/auth/forgot-password/set-new-password"
         className="w-[406px] mt-10"
-      />
+      >
+        Open email app
+      </Button>
 
       <div className="flex my-10 items-center gap-1">
         <p className="body-small-bold text-gray">Didn't receive the email?</p>
@@ -32,7 +33,7 @@ export default function CheckEmail() {
         </Link>
       </div>
 
-      <BackButton text={"Back to Login"} path={"/auth/sign-in"} />
+      <BackButton path={"/auth/sign-in"}>Back to Login</BackButton>
     </div>
   );
 }

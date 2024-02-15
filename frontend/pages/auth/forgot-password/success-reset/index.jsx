@@ -18,13 +18,11 @@ export default function SuccessReset() {
         magically.
       </p>
 
-      <Button
-        text="Continue"
-        href="/auth/sign-in"
-        className="w-[406px] my-10"
-      />
+      <Button href="/auth/sign-in" className="w-[406px] my-10">
+        Continue
+      </Button>
 
-      <BackButton text={"Back to Login"} path={"/auth/sign-in"} />
+      <BackButton path={"/auth/sign-in"}>Back to Login</BackButton>
     </div>
   );
 }
