@@ -9,3 +9,4 @@
 /frontend/.next/
 /frontend/.env*.local
 /frontend/yarn.lock
+.DS_Store
