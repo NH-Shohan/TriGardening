@@ -20,8 +20,9 @@ const HomeHomeCard = () => {
       </div>
 
       <div className=" grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
-        {cardlist.map((card) => (
+        {cardlist.map((card, index) => (
           <Card
+            key={index}
             image={card.image}
             title={card.title}
             avilable={card.avilable}
