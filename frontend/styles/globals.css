@@ -5,6 +5,14 @@
 @media (prefers-color-scheme: dark) {
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Design Style */
 .gradient {
   background: linear-gradient(to right bottom, #009900, #007700);
