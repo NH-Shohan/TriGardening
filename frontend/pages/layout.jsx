@@ -9,6 +9,7 @@ export default function Layout({ children }) {
   const path = usePathname();
   return (
     <>
+      {/* Zerin */}
       <main className={`bg-white ${glegoo.className}`}>
         <Navbar />
         {children}
