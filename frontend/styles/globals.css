@@ -74,3 +74,16 @@ Body {
   background-size: cover;
   position: absolute;
 }
+.bg-cards {
+   background-image: url("/public/blogb.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+ 
+}
+.mr-b {
+  margin-right: 2rem;
+  margin-top: 5rem;
+}
+  .p-5rem {
+    padding: 5rem;
+  }

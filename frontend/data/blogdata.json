@@ -1,0 +1,63 @@
+[
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 1",
+      "date": "06 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 2",
+      "date": "07 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 3",
+      "date": "08 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 4",
+      "date": "09 Dec, 2023",
+      "content": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 5",
+      "date": "10 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 6",
+      "date": "11 Dec, 2023",
+      "content": "Sed do eiusmod tempor incididunt ut labore et dolore magna amco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 7",
+      "date": "12 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a,  mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 8",
+      "date": "13 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 9",
+      "date": "14 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    },
+    {
+      "imageUrl": "/blog.png",
+      "title": "Title of the blog 10",
+      "date": "15 Dec, 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus."
+    }
+  ]
+  
