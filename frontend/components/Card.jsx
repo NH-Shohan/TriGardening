@@ -54,10 +54,10 @@ const Card = ({ image, title, avilable, in_stock, description }) => {
         </p>
       </div>
 
-      <div className="mx-6 mb-6 flex gap-4">
+      <div className="mx-6 mb-6 flex gap-2">
         <Button
           outline
-          className={"rounded-lg flex justify-center items-center h-full w-16"}
+          className={"rounded-lg flex justify-center items-center h-full w-20"}
         >
           <BsCart4 className="text-2xl" />
         </Button>

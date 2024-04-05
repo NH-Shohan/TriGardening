@@ -33,8 +33,8 @@ const Navbar = () => {
               </div>
             </Link>
 
-            <div className="">
-              <ul className="body-small flex md:flex-row flex-col md:items-center gap-10">
+            <div>
+              <ul className="body-small flex md:flex-row flex-col md:items-center gap-6">
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/allplants">All Plants</NavLink>
                 <NavLink href="/aboutus">About Us</NavLink>
