@@ -7,94 +7,50 @@ import Button from "./Button";
 const Navbar = () => {
   const path = usePathname();
 
+  const NavLink = ({ href, children }) => (
+    <li>
+      <Link href={href}>
+        <p className={path === href ? "text-primary font-normal" : ""}>
+          {children}
+        </p>
+      </Link>
+    </li>
+  );
+
   return (
-    <div className="h-[70px] flex justify-center items-center sticky">
-      <nav className="flex justify-between items-center container mx-auto">
-        <Link href={"/"}>
-          <div className="w-[50px] m-2 flex gap-1">
-            <Image src={logoPic} alt="Logo Picture" />
-            <h5 className="font-bold text-primary leading-5">
-              Tri <br /> Gardening
-            </h5>
-          </div>
-        </Link>
+    <>
+      {!path.startsWith("/auth") && (
+        <div className="h-[70px] flex justify-center items-center sticky top-0 z-50 bg-white/90 backdrop-blur-[5px]">
+          <nav className="flex justify-between items-center container mx-auto">
+            <Link href={"/"}>
+              <div className="w-[50px] m-2 flex gap-1">
+                <Image src={logoPic} alt="Logo Picture" />
+                <h5 className="font-bold text-primary leading-5">
+                  Tri
+                  <br />
+                  Gardening
+                </h5>
+              </div>
+            </Link>
 
-        <div className="md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[9%] md:w-auto w-full flex items-center">
-          <ul className="body-small flex md:flex-row flex-col md:items-center gap-10">
-            <li>
-              <Link
-                className={
-                  path === "/" ? "text-primary font-bold" : "text-black"
-                }
-                href="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={
-                  path === "/allplants"
-                    ? "text-primary font-bold"
-                    : "text-black"
-                }
-                href="/allplants"
-              >
-                All Plants
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={
-                  path === "/aboutus" ? "text-primary font-bold" : "text-black"
-                }
-                href="/aboutus"
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={
-                  path === "/blogs" ? "text-primary font-bold" : "text-black"
-                }
-                href="/blogs"
-              >
-                Blogs
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={
-                  path === "/buy" ? "text-primary font-bold" : "text-black"
-                }
-                href="/buy"
-              >
-                Buy
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={
-                  path === "/contactus"
-                    ? "text-primary font-bold"
-                    : "text-black"
-                }
-                href="/contactus"
-              >
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </div>
+            <div className="">
+              <ul className="body-small flex md:flex-row flex-col md:items-center gap-10">
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/allplants">All Plants</NavLink>
+                <NavLink href="/aboutus">About Us</NavLink>
+                <NavLink href="/blogs">Blogs</NavLink>
+                <NavLink href="/buy">Buy</NavLink>
+                <NavLink href="/contactus">Contact Us</NavLink>
+              </ul>
+            </div>
 
-        <div>
-          <Button className={"w-[120px]"} href="/auth/sign-in">
-            Login
-          </Button>
+            <Button className={""} href="/auth/sign-in">
+              Login
+            </Button>
+          </nav>
         </div>
-      </nav>
-    </div>
+      )}
+    </>
   );
 };
 
