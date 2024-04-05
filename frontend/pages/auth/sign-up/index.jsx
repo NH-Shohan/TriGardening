@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function SignUp() {
   return (
-    <main className="h-[calc(100vh-70px)] w-full background">
-      <div className="h-[calc(100vh-70px)] w-full bg-auth">
-        <div className="h-[calc(100vh-70px)] flex justify-center items-center">
+    <main className="h-screen w-full background">
+      <div className="h-screen w-full bg-auth">
+        <div className="h-screen flex justify-center items-center">
           <div className="bg-[#0077004D] w-[486px] rounded-2xl p-10 shadow-inside backdrop-blur-[25px]">
             <h4 className="text-primary text-center mb-8">Sign up</h4>
 
