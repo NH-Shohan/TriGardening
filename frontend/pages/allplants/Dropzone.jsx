@@ -77,14 +77,18 @@ const Dropzone = ({ className }) => {
         <div className="flex flex-col items-center justify-center gap-3">
           <FcAddImage className="w-10 h-10" />
           {isDragActive ? (
-            <p>Drop the files here ...</p>
+            <p className="text-primary font-semibold capitalize">
+              Drop the files here...
+            </p>
           ) : (
-            <p>Drag & drop files here, or click to select files</p>
+            <p className="font-normal capitalize">
+              Drag & drop files here, or click to select files
+            </p>
           )}
         </div>
       </div>
 
-      {files.length > 0 && (
+      {(files.length > 0 || rejected.length > 0) && (
         <section className="mt-5">
           <div className="flex justify-between items-center">
             <p className="title text-xl font-semibold text-primary">Preview</p>
@@ -97,11 +101,10 @@ const Dropzone = ({ className }) => {
             </button>
           </div>
 
-          {/* Accepted files */}
           <h3 className="title text-lg font-normal mt-4 border-b border-gray-light pb-1">
-            Accepted Files
+            Accepted Images
           </h3>
-          <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-10">
+          <ul className="mt-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-10">
             {files.map((file) => (
               <li
                 key={file.name}
@@ -119,7 +122,7 @@ const Dropzone = ({ className }) => {
                 />
                 <button
                   type="button"
-                  className="w-5 h-5 border border-primary bg-secondary-400 rounded-full flex justify-center items-center absolute -top-3 -right-2 hover:bg-primary transition-colors"
+                  className="w-5 h-5 border bg-white border-primary bg-secondary-400 rounded-full flex justify-center items-center absolute -top-3 -right-2 hover:bg-primary transition-colors"
                   onClick={() => removeFile(file.name)}
                 >
                   <GoX className="w-5 h-5 fill-primary hover:fill-white transition-colors" />
@@ -131,33 +134,39 @@ const Dropzone = ({ className }) => {
             ))}
           </ul>
 
-          {/* Rejected Files */}
-          <h3 className="title text-lg font-normal mt-10 border-b border-gray-light pb-1 text-red">
-            Rejected Files
-          </h3>
-          <ul className="mt-6 flex flex-col">
-            {rejected.map(({ file, errors }) => (
-              <li key={file.name} className="flex items-start justify-between">
-                <div>
-                  <p className="mt-2 text-neutral-500 text-sm font-medium">
-                    {file.name}
-                  </p>
-                  <ul className="text-[12px] text-red-400">
-                    {errors.map((error) => (
-                      <li key={error.code}>{error.message}</li>
-                    ))}
-                  </ul>
-                </div>
-                <button
-                  type="button"
-                  className="mt-1 py-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-white transition-colors"
-                  onClick={() => removeRejected(file.name)}
-                >
-                  remove
-                </button>
-              </li>
-            ))}
-          </ul>
+          {rejected.length > 0 && (
+            <>
+              <h3 className="title text-lg font-normal mt-10 border-b border-gray-light pb-1 text-red">
+                Rejected Images
+              </h3>
+              <ul className="mt-6 flex flex-col">
+                {rejected.map(({ file, errors }) => (
+                  <li
+                    key={file.name}
+                    className="flex items-center justify-between"
+                  >
+                    <div>
+                      <p className="mt-2 text-neutral-500 text-sm font-medium">
+                        {file.name}
+                      </p>
+                      <ul className="text-[12px] text-red-400">
+                        {errors.map((error) => (
+                          <li key={error.code}>{error.message}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <button
+                      type="button"
+                      className="text-xs uppercase tracking-wider font-normal text-red border border-red rounded-md px-3 hover:bg-secondary-400 hover:bg-red hover:text-white transition-colors py-1.5"
+                      onClick={() => removeRejected(file.name)}
+                    >
+                      remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </section>
       )}
     </form>

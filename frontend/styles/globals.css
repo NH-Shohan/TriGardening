@@ -5,6 +5,18 @@
 @media (prefers-color-scheme: dark) {
 }
 
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary/30 rounded-full my-3;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/70 rounded-full;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

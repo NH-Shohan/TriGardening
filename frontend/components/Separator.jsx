@@ -4,7 +4,7 @@ const Separator = ({ varticale, className }) => {
   return (
     <div
       className={cn(
-        `bg-gray-light ${!varticale ? "w-full h-[2px]" : "h-full w-[2px]"}`,
+        `bg-gray-light ${!varticale ? "w-full h-[1px]" : "h-full w-[2px]"}`,
         className
       )}
     />

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Overlay = ({ children }) => (
@@ -11,9 +12,12 @@ const Overlay = ({ children }) => (
   </motion.div>
 );
 
-const ModalContainer = ({ children }) => (
+const ModalContainer = ({ children, className }) => (
   <motion.div
-    className="z-[100] bg-white absolute h-[660px] overflow-y-auto top-[5%] left-[50&] rounded-lg shadow p-4"
+    className={cn(
+      "z-[100] bg-white absolute h-[70vh] overflow-y-auto top-[5%] left-[50&] rounded-lg shadow p-4",
+      className
+    )}
     initial={{ y: "-50%" }}
     animate={{ y: "10%" }}
     exit={{ y: "-50%" }}
@@ -56,11 +60,11 @@ const CloseButton = ({ onClick }) => (
   </svg>
 );
 
-const Modal = ({ handleClose, children, isOpen }) => (
+const Modal = ({ handleClose, children, isOpen, className }) => (
   <AnimatePresence>
     {isOpen && (
       <Overlay>
-        <ModalContainer>
+        <ModalContainer className={className}>
           <CloseButton onClick={handleClose} />
           {children}
         </ModalContainer>
