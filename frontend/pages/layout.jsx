@@ -1,15 +1,18 @@
 import Footer from "@/components/Footer";
-import { Glegoo } from "next/font/google";
+import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import Navbar from "../components/Navbar";
 
-const glegoo = Glegoo({ subsets: ["latin"], weight: ["400", "700"] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+});
 
 export default function Layout({ children }) {
   const path = usePathname();
   return (
     <>
-      <main className={`bg-white ${glegoo.className}`}>
+      <main className={`bg-white ${inter.className}`}>
         <Navbar />
         {children}
         {path === "/allplants" ? null : <Footer />}

@@ -12,10 +12,10 @@ const HomeHomeCard = () => {
         </h4>
         <Link
           href="/allplants"
-          className="text-primary body-bold flex gap-2 items-center"
+          className="text-primary font-medium text-base flex gap-2 items-center hover:underline"
         >
           See All Plants
-          <IoArrowForwardCircleOutline className="text-3xl" />
+          <IoArrowForwardCircleOutline className="text-2xl" />
         </Link>
       </div>
 
