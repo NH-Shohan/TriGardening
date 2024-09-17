@@ -1,3 +1,15 @@
+# server
+/server/node_modules
+/server/dist
+/server/.env*.local
+/server/yarn.lock
+
+# client
+/client/node_modules
+/client/.next/
+/client/.env*.local
+/client/yarn.lock
+
 # backend
 /backend/node_modules
 /backend/dist
