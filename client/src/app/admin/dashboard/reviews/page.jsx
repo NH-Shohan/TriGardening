@@ -1,4 +1,4 @@
-import ReviewsPage from "./reviews";
+import ReviewsPage from "./Reviews";
 
 const Review = () => {
   return <ReviewsPage />;
