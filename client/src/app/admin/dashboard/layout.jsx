@@ -1,7 +1,7 @@
 "use client";
 
 import logoSingle from "@/assets/logoSingle.svg";
-import Divider from "@/components/ui/divider";
+import { Separator } from "@/components/ui/separator";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import {
@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }) {
         "rounded-md flex flex-col md:flex-row w-screen mx-auto overflow-hidden h-screen p-5 gap-5"
       )}
     >
-      <Sidebar className="" open={open} setOpen={setOpen} animate={false}>
+      <Sidebar className="" open={open} setOpen={setOpen} animate={true}>
         <SidebarBody className="justify-between gap-5 bg-neutral-50 rounded-2xl border">
           <div className="flex flex-col overflow-y-auto overflow-x-hidden">
             <>
@@ -69,13 +69,13 @@ export default function DashboardLayout({ children }) {
                 <SidebarLink
                   key={idx}
                   link={link}
-                  active={pathname === link.href}
+                  active={pathname.startsWith(link.href)}
                 />
               ))}
             </div>
           </div>
           <div className="group transition-all">
-            <Divider className={"group-hover:opacity-0"} />
+            <Separator className={"group-hover:opacity-0"} />
             <SidebarLink
               className={"hover:bg-red-500/10 hover:text-red-500"}
               link={{

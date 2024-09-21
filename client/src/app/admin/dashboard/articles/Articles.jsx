@@ -26,8 +26,8 @@ import {
   Trash,
 } from "@phosphor-icons/react";
 
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Checkbox } from "@/components/ui/checkbox";
-import Divider from "@/components/ui/divider";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -37,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import {
   flexRender,
   getCoreRowModel,
@@ -46,11 +47,14 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import data from "../../../../data/atricles.json";
+import articles from "../../../../data/articles.json";
 
-const categoryOptions = [...new Set(data.map((article) => article.category))];
-const statusOptions = [...new Set(data.map((article) => article.status))];
+const categoryOptions = [
+  ...new Set(articles.map((article) => article.category)),
+];
+const statusOptions = [...new Set(articles.map((article) => article.status))];
 
 const columns = [
   {
@@ -79,13 +83,16 @@ const columns = [
     accessorKey: "image",
     header: "Image",
     cell: ({ row }) => (
-      <Image
-        src={row.original.image}
-        className="rounded-xl w-auto h-auto"
-        alt="article image"
-        width={100}
-        height={40}
-      />
+      <div className="w-[150px]">
+        <AspectRatio ratio={3 / 2} className="bg-transparent">
+          <Image
+            src={row.original.image}
+            className="rounded-xl h-full w-full object-cover"
+            alt="article image"
+            fill
+          />
+        </AspectRatio>
+      </div>
     ),
   },
   {
@@ -212,6 +219,7 @@ export function DataTable({ columns, data }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
+  const router = useRouter();
 
   const table = useReactTable({
     data,
@@ -228,12 +236,21 @@ export function DataTable({ columns, data }) {
       columnFilters,
       rowSelection,
     },
+    initialState: {
+      pagination: {
+        pageSize: 6,
+      },
+    },
   });
 
   const handleDelete = () => {
     console.log(Object.keys(rowSelection));
   };
   const hasSelectedRows = Object.values(rowSelection).length > 0;
+
+  const handlePost = () => {
+    router.push("/admin/dashboard/articles/post");
+  };
 
   return (
     <div className="space-y-5 relative">
@@ -296,7 +313,10 @@ export function DataTable({ columns, data }) {
           </div>
 
           <div className="flex justify-between items-center gap-2">
-            <Button className="bg-neutral-50 text-green-600 border border-dashed border-green-600 hover:bg-green-600/10 flex items-center gap-2 text-base font-light">
+            <Button
+              className="bg-neutral-50 text-green-600 border border-dashed border-green-600 hover:bg-green-600/10 flex items-center gap-2 text-base font-light"
+              onClick={handlePost}
+            >
               <Plus className="w-5 h-5" /> <p>New Article</p>
             </Button>
 
@@ -312,12 +332,35 @@ export function DataTable({ columns, data }) {
           </div>
         </div>
 
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+        <Separator />
+
+        <div className="flex items-center justify-between">
+          <div className="flex-1 text-sm text-muted-foreground">
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} row(s) selected.
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Previous Page
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Next Page
+            </Button>
+          </div>
         </div>
 
-        <Divider />
+        <Separator />
       </div>
 
       <div className="rounded-xl border overflow-hidden">
@@ -370,25 +413,6 @@ export function DataTable({ columns, data }) {
           </TableBody>
         </Table>
       </div>
-
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
     </div>
   );
 }
@@ -396,7 +420,7 @@ export function DataTable({ columns, data }) {
 export default function ArticlePage() {
   return (
     <div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={articles} />
     </div>
   );
 }
