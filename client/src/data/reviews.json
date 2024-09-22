@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Ralph Edwards",
+    "date": "August 7, 2017",
+    "review": "I'm impressed by the bakery's commitment to using high-quality ingredients. Everything tastes so fresh and wholesome.",
+    "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Cameron Williamson",
+    "date": "July 15, 2020",
+    "review": "A delightful experience every time! Their pastries are incredible, and the service is top-notch.",
+    "avatar": "https://randomuser.me/api/portraits/men/2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Leslie Alexander",
+    "date": "June 11, 2018",
+    "review": "The bread is always fresh, and the staff are always friendly. Highly recommended!",
+    "avatar": "https://randomuser.me/api/portraits/women/3.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Esther Howard",
+    "date": "September 22, 2019",
+    "review": "Great bakery with a wide variety of treats! I always look forward to trying something new.",
+    "avatar": "https://randomuser.me/api/portraits/women/4.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Wade Warren",
+    "date": "March 5, 2021",
+    "review": "If you're a bread lover like me, this place will not disappoint!",
+    "avatar": "https://randomuser.me/api/portraits/men/5.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Savannah Nguyen",
+    "date": "November 9, 2020",
+    "review": "Absolutely love their croissants. The perfect balance of buttery and flaky.",
+    "avatar": "https://randomuser.me/api/portraits/women/6.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Jenny Wilson",
+    "date": "January 2, 2019",
+    "review": "This is my go-to bakery for any occasion. Highly recommend it!",
+    "avatar": "https://randomuser.me/api/portraits/women/7.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Kristin Watson",
+    "date": "February 28, 2020",
+    "review": "Amazing service and the most delicious baked goods I've ever tasted.",
+    "avatar": "https://randomuser.me/api/portraits/women/8.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Darlene Robertson",
+    "date": "May 14, 2017",
+    "review": "The best bakery in town, hands down. I recommend them to everyone!",
+    "avatar": "https://randomuser.me/api/portraits/women/9.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Guy Hawkins",
+    "date": "April 10, 2018",
+    "review": "Wonderful flavors and textures in everything I've tried. Consistently excellent.",
+    "avatar": "https://randomuser.me/api/portraits/men/10.jpg"
+  }
+]

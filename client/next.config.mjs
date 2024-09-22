@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["i.ibb.co.com"],
+    domains: ["i.ibb.co.com", "randomuser.me"],
   },
   async rewrites() {
     return [

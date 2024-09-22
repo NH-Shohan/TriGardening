@@ -314,10 +314,10 @@ export function DataTable({ columns, data }) {
 
           <div className="flex justify-between items-center gap-2">
             <Button
-              className="bg-neutral-50 text-green-600 border border-dashed border-green-600 hover:bg-green-600/10 flex items-center gap-2 text-base font-light"
+              className="bg-neutral-50 text-green-600 border-2 border-dashed border-green-600 hover:bg-green-600/10 flex items-center gap-2 text-base font-semibold"
               onClick={handlePost}
             >
-              <Plus className="w-5 h-5" /> <p>New Article</p>
+              <Plus weight="bold" className="w-5 h-5" /> <p>New Article</p>
             </Button>
 
             {hasSelectedRows && (
