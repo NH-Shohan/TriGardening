@@ -5,6 +5,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --novel-highlight-default: #ffffff;
+  --novel-highlight-purple: #f6f3f8;
+  --novel-highlight-red: #fdebeb;
+  --novel-highlight-yellow: #fbf4a2;
+  --novel-highlight-blue: #c1ecf9;
+  --novel-highlight-green: #acf79f;
+  --novel-highlight-orange: #faebdd;
+  --novel-highlight-pink: #faf1f5;
+  --novel-highlight-gray: #f1f1ef;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,14 +41,12 @@ h1 {
   font-weight: 800;
   font-size: 140px;
   line-height: 100%;
-  letter-spacing: -5px;
 }
 h2 {
   font-family: var(--font-bricolage-grotesque);
   font-weight: 700;
   font-size: 64px;
   line-height: 100%;
-  letter-spacing: -2px;
 }
 h3 {
   font-family: var(--font-bricolage-grotesque);
@@ -69,6 +76,15 @@ small {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

@@ -40,12 +40,11 @@ export const FileUpload = ({ onChange }) => {
     );
 
     const uniqueFiles = acceptedFiles.filter((file) => {
-      const isDuplicate = files.some(
-        (existingFile) =>
-          existingFile.name === file.name && existingFile.size === file.size
-      );
+      const isDuplicate = files.some((existingFile) => {
+        existingFile.name === file.name && existingFile.size === file.size;
+      });
+
       if (isDuplicate) {
-        window.alert("Duplicate file detected: " + file.name);
         return false;
       }
       return true;

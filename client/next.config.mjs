@@ -4,6 +4,14 @@ const nextConfig = {
   images: {
     domains: ["i.ibb.co.com"],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/uploads/:path*",
+        destination: "/uploads/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

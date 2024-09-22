@@ -1,6 +1,8 @@
+import { Toaster } from "@/components/ui/sonner";
 import { Bricolage_Grotesque } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./prosemirror.css";
 
 const sfPro = localFont({
   // weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -28,6 +30,7 @@ export default function RootLayout({ children }) {
         className={`${sfPro.variable} ${bricolageGrotesque.variable} text-neutral-800 antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
