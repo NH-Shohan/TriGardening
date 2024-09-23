@@ -46,7 +46,9 @@ const AdminPage = () => {
           className="absolute -top-[288px] -left-12 -z-10 scale-x-[-1]"
           priority
         />
+
         <Image src={logo} alt="logo" priority />
+        
         <div className="space-y-4">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="email">Email</Label>

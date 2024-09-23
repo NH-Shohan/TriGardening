@@ -10,6 +10,12 @@ const sfPro = localFont({
   display: "swap",
 });
 
+const sfProDisplay = localFont({
+  src: "../fonts/SF-Pro-Display-Heavy.otf",
+  variable: "--font-sf-pro-display",
+  display: "swap",
+});
+
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage-grotesque",
@@ -25,7 +31,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${sfPro.variable} ${bricolageGrotesque.variable} text-neutral-800 antialiased`}
+        className={`${sfPro.variable} ${sfProDisplay.variable} ${bricolageGrotesque.variable} text-neutral-800 antialiased bg-neutral-100`}
       >
         {children}
         <Toaster />

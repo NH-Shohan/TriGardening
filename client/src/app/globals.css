@@ -77,7 +77,7 @@ small {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -85,6 +85,15 @@ small {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .font-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 4px;
+  }
+
+  .font-sf-pro-display {
+    font-family: var(--font-sf-pro-display);
   }
 }
 
