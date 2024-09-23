@@ -51,12 +51,6 @@ const tiptapImage = TiptapImage.extend({
   },
 });
 
-// const updatedImage = UpdatedImage.configure({
-//   HTMLAttributes: {
-//     class: cx("rounded-lg border"),
-//   },
-// });
-
 const taskList = TaskList.configure({
   HTMLAttributes: {
     class: cx("not-prose pl-2"),

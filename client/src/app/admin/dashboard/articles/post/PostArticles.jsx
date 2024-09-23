@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import ContentForm from "@/components/ui/content-form";
 import { FileUpload } from "@/components/ui/file-upload";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -13,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { NotePencil } from "@phosphor-icons/react";
 import { CaretLeft, Dot } from "@phosphor-icons/react/dist/ssr";
 import DOMPurify from "dompurify";
 import { Bricolage_Grotesque } from "next/font/google";
@@ -36,6 +38,7 @@ const PostArticles = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [content, setContent] = useState("");
   const [isPreview, setIsPreview] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
   const router = useRouter();
   const textareaRef = useRef(null);
@@ -48,7 +51,14 @@ const PostArticles = () => {
 
   const handleFileUpload = (files) => {
     setFiles(files);
-    console.log(files);
+  };
+
+  const handleEditClick = () => {
+    setIsEditable(true);
+  };
+
+  const handleSlugChange = (e) => {
+    setSlug(e.target.value);
   };
 
   useEffect(() => {
@@ -87,9 +97,27 @@ const PostArticles = () => {
         onInput={autoResizeTextarea}
       />
 
-      <p className="py-4 text-sm text-neutral-400">
-        https://trigardeningbd.com/{slug}
-      </p>
+      <div className="py-4 text-sm text-neutral-500 flex justify-between items-center">
+        <div className="flex w-full items-center">
+          <p>https://trigardeningbd.com/</p>
+          <div className="flex-grow">
+            <Input
+              value={slug}
+              onChange={handleSlugChange}
+              disabled={!isEditable}
+              className="w-full p-0 border-none ring-0 h-fit focus-visible:ring-0 rounded-none"
+            />
+          </div>
+        </div>
+        {slug && (
+          <NotePencil
+            size={16}
+            weight="bold"
+            className="cursor-pointer w-fit ml-2"
+            onClick={handleEditClick}
+          />
+        )}
+      </div>
 
       <div className="flex items-center max-w-2xl">
         <Select

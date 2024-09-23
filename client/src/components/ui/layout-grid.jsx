@@ -40,9 +40,7 @@ export const LayoutGrid = ({ cards }) => {
               allowFullScreen
               className={cn(
                 "w-full h-full",
-                selected?.id === card.id
-                  ? "pointer-events-none" // Disable interaction when selected
-                  : ""
+                selected?.id === card.id ? "pointer-events-none" : ""
               )}
             />
           </motion.div>

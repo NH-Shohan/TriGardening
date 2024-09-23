@@ -118,7 +118,7 @@ export const Logo = () => {
 
 const Dashboard = ({ children }) => {
   return (
-    <div className="bg-neutral-50 rounded-2xl w-full p-5 border overflow-auto">
+    <div className="bg-neutral-50 rounded-2xl w-full h-full p-5 border overflow-auto">
       {children}
     </div>
   );

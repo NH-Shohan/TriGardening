@@ -5,14 +5,12 @@ import "./globals.css";
 import "./prosemirror.css";
 
 const sfPro = localFont({
-  // weight: ["200", "300", "400", "500", "600", "700", "800"],
   src: "../fonts/SF-Pro.ttf",
   variable: "--font-sf-pro",
   display: "swap",
 });
 
 const bricolageGrotesque = Bricolage_Grotesque({
-  // weight: ["200", "300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
   variable: "--font-bricolage-grotesque",
   display: "swap",

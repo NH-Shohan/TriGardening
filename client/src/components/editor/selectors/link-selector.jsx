@@ -6,7 +6,9 @@ import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { PopoverContent } from "@/components/ui/popover";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
+import { toast } from "sonner";
 
+// Utility functions
 export function isValidUrl(url) {
   try {
     new URL(url);
@@ -15,6 +17,7 @@ export function isValidUrl(url) {
     return false;
   }
 }
+
 export function getUrlFromString(str) {
   if (isValidUrl(str)) return str;
   try {
@@ -26,23 +29,23 @@ export function getUrlFromString(str) {
   }
 }
 
+// LinkSelector component
 export const LinkSelector = ({ open, onOpenChange }) => {
-  const inputRef = useRef < HTMLInputElement > null;
+  const inputRef = useRef(null); // Correctly using useRef here
   const { editor } = useEditor();
 
   useEffect(() => {
-    inputRef.current?.focus();
-  });
+    if (open) {
+      inputRef.current?.focus(); // Ensure the input gets focus when the popover opens
+    }
+  }, [open]);
+
   if (!editor) return null;
 
   return (
     <Popover modal={true} open={open} onOpenChange={onOpenChange}>
       <PopoverTrigger asChild>
-        <Button
-          size="sm"
-          variant="ghost"
-          className="gap-2 rounded-none border-none"
-        >
+        <Button size="sm" variant="ghost" className="gap-2 rounded border-none">
           <p className="text-base">↗</p>
           <p
             className={cn("underline decoration-stone-400 underline-offset-4", {
@@ -53,22 +56,27 @@ export const LinkSelector = ({ open, onOpenChange }) => {
           </p>
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-60 p-0" sideOffset={10}>
+      <PopoverContent
+        align="start"
+        className="w-60 p-0 rounded-xl"
+        sideOffset={10}
+      >
         <form
           onSubmit={(e) => {
-            const target = e.currentTarget;
             e.preventDefault();
-            const input = target[0];
+            const input = inputRef.current; // Correctly referencing the input element
             const url = getUrlFromString(input.value);
             if (url) {
               editor.chain().focus().setLink({ href: url }).run();
               onOpenChange(false);
+            } else {
+              toast.error("Invalid URL. Please enter a valid link.");
             }
           }}
           className="flex p-1"
         >
           <input
-            ref={inputRef}
+            ref={inputRef} // Correctly attaching the ref here
             type="text"
             placeholder="Paste a link"
             className="flex-1 bg-background p-1 text-sm outline-none"
@@ -79,7 +87,7 @@ export const LinkSelector = ({ open, onOpenChange }) => {
               size="icon"
               variant="outline"
               type="button"
-              className="flex h-8 items-center rounded-sm p-1 text-red-600 transition-all hover:bg-red-100 dark:hover:bg-red-800"
+              className="flex h-8 items-center rounded-lg p-1 text-red-600 hover:text-red-600 transition-all hover:bg-red-100 dark:hover:bg-red-800"
               onClick={() => {
                 editor.chain().focus().unsetLink().run();
                 if (inputRef.current) {
@@ -91,7 +99,7 @@ export const LinkSelector = ({ open, onOpenChange }) => {
               <Trash className="h-4 w-4" />
             </Button>
           ) : (
-            <Button size="icon" className="h-8">
+            <Button size="icon" className="h-8 rounded-lg">
               <Check className="h-4 w-4" />
             </Button>
           )}
