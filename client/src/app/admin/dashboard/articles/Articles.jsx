@@ -86,7 +86,7 @@ const columns = [
       <div className="w-[150px]">
         <AspectRatio ratio={3 / 2} className="bg-transparent">
           <Image
-            src={row.original.image}
+            src={row.original.files.url}
             className="rounded-xl h-full w-full object-cover"
             alt="article image"
             fill
@@ -101,7 +101,7 @@ const columns = [
     cell: ({ row }) => (
       <div className="w-[400px]">
         <p className="text-base font-semibold text-ellipsis overflow-hidden text-nowrap">
-          {row.original.details}
+          {row.original.title}
         </p>
         <p className="text-sm text-ellipsis overflow-hidden line-clamp-3">
           {row.original.description}

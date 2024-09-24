@@ -32,7 +32,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 const PostArticles = () => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState();
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -80,6 +80,17 @@ const PostArticles = () => {
   const handleSubmit = (editorContent) => {
     setContent(editorContent);
     setIsPreview(true);
+    const postData = {
+      files,
+      title,
+      slug,
+      selectedCategory,
+      content: editorContent,
+      isPreview,
+      isEditable,
+      currentDate,
+    };
+    console.log(postData);
   };
 
   return (
@@ -130,8 +141,8 @@ const PostArticles = () => {
           <SelectContent>
             <SelectItem value="all">All Category</SelectItem>
             <SelectSeparator />
-            {categoryOptions.map((category) => (
-              <SelectItem key={category} value={category}>
+            {categoryOptions.map((category, index) => (
+              <SelectItem key={index} value={category}>
                 {category}
               </SelectItem>
             ))}
