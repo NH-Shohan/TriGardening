@@ -40,6 +40,8 @@ const PostArticles = () => {
   const [isPreview, setIsPreview] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
 
+  console.log(content);
+
   const router = useRouter();
   const textareaRef = useRef(null);
 
