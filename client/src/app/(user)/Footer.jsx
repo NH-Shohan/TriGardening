@@ -19,13 +19,13 @@ const Footer = () => {
           <Image
             src={leafShing}
             alt="leafShing"
-            className="absolute w-24 top-0 right-[20%]"
+            className="absolute w-24 top-0 right-[20%] hidden lg:block"
             priority
           />
           <Image
             src={leafShing}
             alt="leafShing"
-            className="absolute w-24 top-0 left-[20%] scale-x-[-1]"
+            className="absolute w-24 top-0 left-[20%] scale-x-[-1] hidden lg:block"
             priority
           />
 
@@ -40,7 +40,7 @@ const Footer = () => {
         <div className="flex justify-center mt-12">
           <Input
             placeholder="example@gmail.com"
-            className="w-[320px] rounded-tl-full rounded-bl-full bg-gray-50 px-4 focus-visible:ring-0"
+            className="w-full md:w-[320px] rounded-tl-full rounded-bl-full bg-gray-50 px-4 focus-visible:ring-0"
           />
           <Button className="rounded-tr-full rounded-br-full bg-green-300 text-green-900 hover:text-green-50">
             Join Now

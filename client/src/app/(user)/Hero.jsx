@@ -14,7 +14,7 @@ const HeroSection = () => {
       />
       <div className="grid place-content-center h-full w-full dark:bg-black bg-grid-neutral-500/[0.2] relative">
         <div className="z-20 space-y-8">
-          <h1 className="text-[8.5vw] tracking-tight">
+          <h1 className="text-[14vw] md:text-[8.5vw] tracking-tight">
             Harness the power <br /> of{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-green-700 to-green-600">
               gardening
