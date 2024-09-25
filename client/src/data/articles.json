@@ -20,7 +20,7 @@
     "title": "Spider Plant",
     "description": "Spider plants are known for their air-purifying abilities and charming green-and-white striped leaves. They are easy to care for, making them perfect for beginners. Spider plants produce long arching stems that can sprout baby plants, often referred to as 'pups'. They thrive in indirect sunlight and need minimal watering, making them a great addition to any home.",
     "slug": "spider-plant",
-    "category": "Indoor",
+    "category": "Outdoor",
     "date": "Sep 14, 2024",
     "status": "Draft",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>Spider plants are known for their air-purifying abilities and charming green-and-white striped leaves. They are easy to care for, making them perfect for beginners. Spider plants produce long arching stems that can sprout baby plants, often referred to as 'pups'. They thrive in indirect sunlight and need minimal watering, making them a great addition to any home.</p></body></html>"
@@ -33,7 +33,7 @@
     "title": "Monstera Deliciosa",
     "description": "The Monstera Deliciosa, commonly known as the Swiss Cheese Plant, is renowned for its unique leaf patterns that develop holes as they mature. This tropical plant is a favorite among plant enthusiasts for its dramatic foliage and ease of care. It prefers bright, indirect light and can tolerate low light conditions, making it versatile for indoor spaces.",
     "slug": "monstera-deliciosa",
-    "category": "Indoor",
+    "category": "Outdoor",
     "date": "Jul 30, 2024",
     "status": "Hidden",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>The Monstera Deliciosa, commonly known as the Swiss Cheese Plant, is renowned for its unique leaf patterns that develop holes as they mature. This tropical plant is a favorite among plant enthusiasts for its dramatic foliage and ease of care. It prefers bright, indirect light and can tolerate low light conditions, making it versatile for indoor spaces.</p></body></html>"
@@ -59,7 +59,7 @@
     "title": "Boston Fern",
     "description": "The Boston Fern is a lush, leafy plant known for its graceful fronds and ability to thrive in high humidity. This plant is a favorite for hanging baskets and as a decorative touch in any room. It prefers indirect light and consistently moist soil, making it a bit more high-maintenance but well worth the effort for its beautiful appearance.",
     "slug": "boston-fern",
-    "category": "Indoor",
+    "category": "Medicinal",
     "date": "Sep 10, 2024",
     "status": "Visible",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>The Boston Fern is a lush, leafy plant known for its graceful fronds and ability to thrive in high humidity. This plant is a favorite for hanging baskets and as a decorative touch in any room. It prefers indirect light and consistently moist soil, making it a bit more high-maintenance but well worth the effort for its beautiful appearance.</p></body></html>"
@@ -72,7 +72,7 @@
     "title": "Peace Lily",
     "description": "Peace Lilies are cherished for their elegant white blooms and lush green leaves. They are excellent air purifiers and thrive in low-light conditions. Water them regularly, but ensure the soil is well-drained to prevent root rot. Peace Lilies are also known to signal when they need water by drooping their leaves, making care easier for the owner.",
     "slug": "peace-lily",
-    "category": "Indoor",
+    "category": "Medicinal",
     "date": "Oct 5, 2024",
     "status": "Draft",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>Peace Lilies are cherished for their elegant white blooms and lush green leaves. They are excellent air purifiers and thrive in low-light conditions. Water them regularly, but ensure the soil is well-drained to prevent root rot. Peace Lilies are also known to signal when they need water by drooping their leaves, making care easier for the owner.</p></body></html>"
@@ -85,7 +85,7 @@
     "title": "Snake Plant",
     "description": "The Snake Plant, or Sansevieria, is famous for its upright, sword-like leaves that can grow tall. This hardy plant is virtually indestructible, making it perfect for beginners and busy individuals. Snake Plants are excellent at filtering indoor air and can tolerate low light and irregular watering. They are ideal for almost any room in the house.",
     "slug": "snake-plant",
-    "category": "Indoor",
+    "category": "Herbal",
     "date": "Nov 20, 2024",
     "status": "Visible",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>The Snake Plant, or Sansevieria, is famous for its upright, sword-like leaves that can grow tall. This hardy plant is virtually indestructible, making it perfect for beginners and busy individuals. Snake Plants are excellent at filtering indoor air and can tolerate low light and irregular watering. They are ideal for almost any room in the house.</p></body></html>"
@@ -98,7 +98,7 @@
     "title": "Dracaena",
     "description": "Dracaena plants are known for their striking foliage and variety of forms, making them popular in homes and offices. They are relatively easy to care for, preferring indirect light and moderate watering. Dracaenas come in many varieties, each with unique leaf shapes and colors, making them versatile for any decor style.",
     "slug": "dracaena",
-    "category": "Indoor",
+    "category": "Herbal",
     "date": "May 16, 2024",
     "status": "Visible",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>Dracaena plants are known for their striking foliage and variety of forms, making them popular in homes and offices. They are relatively easy to care for, preferring indirect light and moderate watering. Dracaenas come in many varieties, each with unique leaf shapes and colors, making them versatile for any decor style.</p></body></html>"
@@ -111,7 +111,7 @@
     "title": "African Violet",
     "description": "African Violets are cherished for their beautiful purple blooms and fuzzy green leaves. They thrive in indirect sunlight and need consistent moisture to flourish. These plants can be a bit finicky, requiring special care to avoid overwatering, but their vibrant flowers make them a delightful addition to any indoor space.",
     "slug": "african-violet",
-    "category": "Indoor",
+    "category": "Herbal",
     "date": "Apr 8, 2024",
     "status": "Draft",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>African Violets are cherished for their beautiful purple blooms and fuzzy green leaves. They thrive in indirect sunlight and need consistent moisture to flourish. These plants can be a bit finicky, requiring special care to avoid overwatering, but their vibrant flowers make them a delightful addition to any indoor space.</p></body></html>"
@@ -124,7 +124,7 @@
     "title": "Pothos",
     "description": "Pothos is a popular houseplant known for its trailing vines and heart-shaped leaves. This plant is incredibly adaptable, thriving in a variety of lighting conditions from low to bright indirect light. Pothos is also easy to propagate, making it a favorite for plant enthusiasts. It's an excellent choice for hanging planters or on shelves where its vines can cascade down.",
     "slug": "pothos",
-    "category": "Indoor",
+    "category": "Herbal",
     "date": "Mar 15, 2024",
     "status": "Visible",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>Pothos is a popular houseplant known for its trailing vines and heart-shaped leaves. This plant is incredibly adaptable, thriving in a variety of lighting conditions from low to bright indirect light. Pothos is also easy to propagate, making it a favorite for plant enthusiasts. It's an excellent choice for hanging planters or on shelves where its vines can cascade down.</p></body></html>"
@@ -137,7 +137,7 @@
     "title": "Bamboo Palm",
     "description": "Bamboo Palms are tropical plants that are perfect for indoor spaces, known for their tall, graceful stems and lush fronds. They thrive in indirect light and help purify the air. These palms can grow quite tall and make a stunning focal point in any room. They require regular watering but should not be allowed to sit in water.",
     "slug": "bamboo-palm",
-    "category": "Indoor",
+    "category": "Outdoor",
     "date": "Dec 12, 2024",
     "status": "Visible",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>Bamboo Palms are tropical plants that are perfect for indoor spaces, known for their tall, graceful stems and lush fronds. They thrive in indirect light and help purify the air. These palms can grow quite tall and make a stunning focal point in any room. They require regular watering but should not be allowed to sit in water.</p></body></html>"
@@ -150,9 +150,113 @@
     "title": "Aloe Vera",
     "description": "Aloe Vera is a succulent known for its medicinal properties and thick, fleshy leaves. This hardy plant is easy to care for and thrives in bright light with minimal watering. It's commonly used in skincare products due to its soothing gel, which can be applied to burns and cuts. Aloe Vera is a must-have for any plant lover.",
     "slug": "aloe-vera",
-    "category": "Indoor",
+    "category": "Outdoor",
     "date": "Jan 20, 2024",
     "status": "Draft",
     "content": "<html xmlns='http://www.w3.org/1999/xhtml'><head></head><body><h3>Heading</h3><p>Aloe Vera is a succulent known for its medicinal properties and thick, fleshy leaves. This hardy plant is easy to care for and thrives in bright light with minimal watering. It's commonly used in skincare products due to its soothing gel, which can be applied to burns and cuts. Aloe Vera is a must-have for any plant lover.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 13",
+      "url": "https://i.ibb.co.com/W5vytHX/13.png"
+    },
+    "title": "English Ivy",
+    "description": "English Ivy is a fast-growing vine known for its ability to climb walls, trellises, or cover the ground. It thrives in indirect light and prefers evenly moist soil. Its dense foliage makes it perfect for hanging baskets or as an outdoor ground cover. However, it can become invasive if not managed properly.",
+    "slug": "english-ivy",
+    "category": "Outdoor",
+    "date": "Feb 15, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>English Ivy is a fast-growing vine known for its ability to climb walls, trellises, or cover the ground. It thrives in indirect light and prefers evenly moist soil. Its dense foliage makes it perfect for hanging baskets or as an outdoor ground cover. However, it can become invasive if not managed properly.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 14",
+      "url": "https://i.ibb.co.com/0qXKVCv/14.png"
+    },
+    "title": "Calathea",
+    "description": "Calathea is a tropical plant known for its bold, decorative leaves with striking patterns. This plant thrives in humid environments and prefers indirect light. It's known as a 'prayer plant' because its leaves move upward at night, mimicking a praying gesture.",
+    "slug": "calathea",
+    "category": "Indoor",
+    "date": "Jan 22, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>Calathea is a tropical plant known for its bold, decorative leaves with striking patterns. This plant thrives in humid environments and prefers indirect light. It's known as a 'prayer plant' because its leaves move upward at night, mimicking a praying gesture.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 15",
+      "url": "https://i.ibb.co.com/0qXKVCv/15.png"
+    },
+    "title": "Philodendron",
+    "description": "Philodendrons are popular houseplants for their heart-shaped leaves and easy care. These plants are climbers and can be trained to grow along trellises or poles. They thrive in low light conditions and are perfect for adding a touch of greenery to any room.",
+    "slug": "philodendron",
+    "category": "Indoor",
+    "date": "Mar 18, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>Philodendrons are popular houseplants for their heart-shaped leaves and easy care. These plants are climbers and can be trained to grow along trellises or poles. They thrive in low light conditions and are perfect for adding a touch of greenery to any room.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 16",
+      "url": "https://i.ibb.co.com/W5vytHX/16.png"
+    },
+    "title": "ZZ Plant",
+    "description": "ZZ Plants are known for their ability to tolerate neglect and low light conditions, making them a perfect choice for busy or forgetful plant owners. Their waxy, dark green leaves can add a touch of elegance to any room. They prefer well-drained soil and infrequent watering.",
+    "slug": "zz-plant",
+    "category": "Indoor",
+    "date": "Apr 20, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>ZZ Plants are known for their ability to tolerate neglect and low light conditions, making them a perfect choice for busy or forgetful plant owners. Their waxy, dark green leaves can add a touch of elegance to any room. They prefer well-drained soil and infrequent watering.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 17",
+      "url": "https://i.ibb.co.com/W5vytHX/17.png"
+    },
+    "title": "Bird of Paradise",
+    "description": "The Bird of Paradise is a tropical plant known for its stunning, bird-like flowers. Its large, banana-shaped leaves make it a striking indoor plant. It prefers bright, direct sunlight and regular watering. This plant can grow tall and requires space to spread its wings.",
+    "slug": "bird-of-paradise",
+    "category": "Indoor",
+    "date": "May 10, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>The Bird of Paradise is a tropical plant known for its stunning, bird-like flowers. Its large, banana-shaped leaves make it a striking indoor plant. It prefers bright, direct sunlight and regular watering. This plant can grow tall and requires space to spread its wings.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 18",
+      "url": "https://i.ibb.co.com/W5vytHX/18.png"
+    },
+    "title": "Golden Pothos",
+    "description": "Golden Pothos is known for its beautiful, variegated leaves that trail elegantly from hanging baskets or shelves. This plant is one of the easiest houseplants to care for, tolerating low light and irregular watering. It's also an excellent air purifier.",
+    "slug": "golden-pothos",
+    "category": "Indoor",
+    "date": "Jun 12, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>Golden Pothos is known for its beautiful, variegated leaves that trail elegantly from hanging baskets or shelves. This plant is one of the easiest houseplants to care for, tolerating low light and irregular watering. It's also an excellent air purifier.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 19",
+      "url": "https://i.ibb.co.com/W5vytHX/19.png"
+    },
+    "title": "Cactus",
+    "description": "Cacti are low-maintenance plants that store water in their stems, making them perfect for hot and dry environments. They thrive in bright, direct sunlight and require infrequent watering. With various shapes and sizes, cacti can be a fun and unique addition to any home or garden.",
+    "slug": "cactus",
+    "category": "Outdoor",
+    "date": "Jul 30, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>Cacti are low-maintenance plants that store water in their stems, making them perfect for hot and dry environments. They thrive in bright, direct sunlight and require infrequent watering. With various shapes and sizes, cacti can be a fun and unique addition to any home or garden.</p></body></html>"
+  },
+  {
+    "files": {
+      "name": "Plant 20",
+      "url": "https://i.ibb.co.com/W5vytHX/20.png"
+    },
+    "title": "Succulent",
+    "description": "Succulents are known for their thick, fleshy leaves that store water, making them drought-tolerant and easy to care for. These plants come in a variety of shapes, sizes, and colors, making them a favorite among plant collectors. Succulents thrive in bright light and need infrequent watering.",
+    "slug": "succulent",
+    "category": "Outdoor",
+    "date": "Aug 15, 2024",
+    "status": "Visible",
+    "content": "<html><head></head><body><h3>Heading</h3><p>Succulents are known for their thick, fleshy leaves that store water, making them drought-tolerant and easy to care for. These plants come in a variety of shapes, sizes, and colors, making them a favorite among plant collectors. Succulents thrive in bright light and need infrequent watering.</p></body></html>"
   }
 ]

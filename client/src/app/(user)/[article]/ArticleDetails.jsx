@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CaretLeft } from "@phosphor-icons/react";
+import { ArrowRight, CaretLeft } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -14,6 +14,8 @@ const ArticleDetails = () => {
   const router = useRouter();
   const params = useParams();
   const article = articles.find((article) => article.slug === params.article);
+  const category = article.category;
+  const slug = params.article;
 
   if (!article) {
     return <div>Article not found</div>;
@@ -37,7 +39,7 @@ const ArticleDetails = () => {
 
   return (
     <>
-      <div className="space-y-5 container mx-auto">
+      <div className="space-y-5 container mx-auto px-5">
         <Button
           variant="outline"
           className="flex gap-1 mt-10"
@@ -86,6 +88,62 @@ const ArticleDetails = () => {
           />
         </div>
       </div>
+
+      <div className="container mx-auto mt-20 space-y-5 px-5">
+        <h3>
+          Recommended <span className="text-green-600">Articles</span>
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
+          {articles
+            .filter(
+              (article) =>
+                article.status.toLowerCase() === "visible" &&
+                article.category.toLowerCase() === category.toLowerCase() &&
+                article.slug !== params.article
+            )
+            .slice(0, 4)
+            .map((article, index) =>
+              article ? (
+                <div
+                  key={index}
+                  className="border bg-neutral-50 rounded-xl p-3 space-y-3"
+                >
+                  <Image
+                    src={article.files.url}
+                    alt={article.files.name}
+                    className="w-full h-auto rounded-lg"
+                    width={100}
+                    height={100}
+                  />
+                  <div className="flex justify-between">
+                    <small className="text-green-600 font-semibold">
+                      {article.category}
+                    </small>
+                    <small className="text-neutral-500">{article.date}</small>
+                  </div>
+                  <h4 className="text-ellipsis line-clamp-2">
+                    {article.title}
+                  </h4>
+                  <p className="text-ellipsis line-clamp-3 text-neutral-500">
+                    {article.description}
+                  </p>
+                  <Link
+                    href={`/${article.slug.replace(/ /g, "-").toLowerCase()}`}
+                    className="flex items-center gap-1 text-blue-600 font-semibold w-fit"
+                  >
+                    Read More <ArrowRight weight="bold" className="w-4 h-4" />
+                  </Link>
+                </div>
+              ) : (
+                <div key={index}>
+                  <p>No articles found</p>
+                </div>
+              )
+            )}
+        </div>
+      </div>
+
       <Footer />
     </>
   );
