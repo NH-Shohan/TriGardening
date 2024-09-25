@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="bg-green-950 h-[87vh] relative mt-24 pt-16 flex flex-col justify-between">
+    <div className="bg-green-950 relative mt-24 pt-16 flex flex-col gap-10 justify-between">
       <div>
         <div className="space-y-4 text-center relative">
           <Image
@@ -47,20 +47,20 @@ const Footer = () => {
           </Button>
         </div>
 
-        <div className="flex justify-center mt-12 gap-4">
-          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 px-5 justify-center w-full md:w-fit mx-auto mt-12 gap-4">
+          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2 px-8">
             <YoutubeLogo size={24} weight="duotone" />
             YouTube
           </Button>
-          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2">
+          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2 px-8">
             <FacebookLogo size={24} weight="duotone" />
             Facebook
           </Button>
-          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2">
+          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2 px-8">
             <LinkedinLogo size={24} weight="duotone" />
             Linkedin
           </Button>
-          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2">
+          <Button className="rounded-full bg-green-100 text-green-600 hover:text-green-50 gap-2 px-8">
             <InstagramLogo size={24} weight="duotone" />
             Instagram
           </Button>
