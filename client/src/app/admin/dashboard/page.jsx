@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Articles from "./articles/page";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const Dashboard = () => {
     router.push("/admin/dashboard/articles");
   }, [router]);
 
-  return null;
+  return <Articles />;
 };
 
 export default Dashboard;

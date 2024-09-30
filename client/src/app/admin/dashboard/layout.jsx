@@ -15,8 +15,9 @@ import { motion } from "framer-motion";
 import { Bricolage_Grotesque } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const links = [
     {
@@ -51,6 +53,26 @@ export default function DashboardLayout({ children }) {
   ];
 
   const [open, setOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:3333/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message);
+        router.push("/admin");
+      } else {
+        throw new Error("Error during logout");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <div
@@ -78,6 +100,7 @@ export default function DashboardLayout({ children }) {
             <Separator className={"group-hover:opacity-0"} />
             <SidebarLink
               className={"hover:bg-red-500/10 hover:text-red-500"}
+              onClick={handleLogout}
               link={{
                 label: "Log Out",
                 href: "/admin",

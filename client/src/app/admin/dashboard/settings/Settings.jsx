@@ -18,31 +18,46 @@ const SettingsPage = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const actualCurrentPassword = "123456";
 
-    if (
-      currentPassword === "" &&
-      newPassword === "" &&
-      confirmPassword === ""
-    ) {
-      toast.warning("All the inputs are empty!");
-      return;
-    }
-
-    if (currentPassword !== actualCurrentPassword) {
-      toast.error("Current password is incorrect.");
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      toast.warning("All fields are required!");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      toast.error("Password does not match.");
+      toast.error("New password and confirm password do not match.");
       return;
     }
 
-    console.log("New Password:", newPassword);
-    toast.success("Password changed successfully!");
+    try {
+      const response = await fetch(
+        "http://localhost:3333/api/auth/change-password",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            currentPassword,
+            newPassword,
+            confirmNewPassword: confirmPassword,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to change password");
+      }
+
+      toast.success(result.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
