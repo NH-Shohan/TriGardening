@@ -9,8 +9,10 @@ import { Envelope, Key } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const AdminPage = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [data, setData] = useState({
     email: "",
@@ -25,9 +27,29 @@ const AdminPage = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    if (data.email === "admin@admin.com" && data.password === "123456") {
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:3333/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Email or password is incorrect");
+      }
+
+      toast.success("Login successful");
+      setLoading(false);
       router.push("/admin/dashboard");
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
     }
   };
 
@@ -46,9 +68,8 @@ const AdminPage = () => {
           className="absolute -top-[288px] -left-12 -z-10 scale-x-[-1]"
           priority
         />
-
         <Image src={logo} alt="logo" priority />
-        
+
         <div className="space-y-4">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="email">Email</Label>
@@ -75,7 +96,7 @@ const AdminPage = () => {
         </div>
 
         <Button onClick={handleSubmit} className="w-full">
-          Login
+          {loading ? "Logging in..." : "Login"}
         </Button>
       </div>
     </main>
