@@ -16,10 +16,10 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { NotePencil } from "@phosphor-icons/react";
 import { CaretLeft, Dot } from "@phosphor-icons/react/dist/ssr";
-import DOMPurify from "dompurify";
 import { Bricolage_Grotesque } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import articles from "../../../../../data/articles.json";
 
 const categoryOptions = [
@@ -39,8 +39,6 @@ const PostArticles = () => {
   const [content, setContent] = useState("");
   const [isPreview, setIsPreview] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
-
-  console.log(content);
 
   const router = useRouter();
   const textareaRef = useRef(null);
@@ -79,20 +77,40 @@ const PostArticles = () => {
     }
   };
 
-  const handleSubmit = (editorContent) => {
+  const handleSubmit = async (editorContent) => {
     setContent(editorContent);
     setIsPreview(true);
+
     const postData = {
       files,
       title,
       slug,
       selectedCategory,
       content: editorContent,
-      isPreview,
-      isEditable,
-      currentDate,
+      date: currentDate,
+      status: "visible",
     };
-    console.log(postData);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/products`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to create article");
+      }
+
+      router.push("/admin/dashboard/articles");
+    } catch (error) {
+      toast.error("Error posting data!");
+    }
   };
 
   return (
@@ -165,24 +183,6 @@ const PostArticles = () => {
       <div className="w-full h-full">
         <ContentForm onSubmit={handleSubmit} />
       </div>
-
-      {/* Preview Section */}
-      {isPreview && (
-        <div className="preview mt-10 p-4 border-t">
-          <h2 className="text-2xl font-bold">Preview of your Article</h2>
-          <h3 className="text-3xl mt-4 font-semibold">{title}</h3>
-          <p className="text-neutral-500 mt-2">
-            URL: https://trigardeningbd.com/{slug}
-          </p>
-          <p className="text-neutral-500 mt-2">
-            Category: {selectedCategory} | Date: {currentDate}
-          </p>
-          <div
-            className="mt-4"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
-          />
-        </div>
-      )}
     </div>
   );
 };

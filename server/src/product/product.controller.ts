@@ -36,7 +36,18 @@ export class ProductController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id') id: string) {
     return this.productService.remove(id);
+  }
+
+  @Delete()
+  async removeMultiple(@Body() ids: string[]): Promise<void> {
+    for (const id of ids) {
+      try {
+        await this.productService.remove(id);
+      } catch (error) {
+        console.error(`Failed to delete product ${id}:`, error);
+      }
+    }
   }
 }

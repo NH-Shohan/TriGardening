@@ -15,9 +15,6 @@ export class Product {
   @Column()
   title: string;
 
-  @Column('text')
-  description: string;
-
   @Column()
   slug: string;
 

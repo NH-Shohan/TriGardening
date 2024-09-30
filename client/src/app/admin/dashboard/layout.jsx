@@ -80,7 +80,7 @@ export default function DashboardLayout({ children }) {
         "rounded-md flex flex-col md:flex-row w-screen mx-auto overflow-hidden h-screen p-5 gap-5"
       )}
     >
-      <Sidebar className="" open={open} setOpen={setOpen} animate={true}>
+      <Sidebar className="" open={open} setOpen={setOpen} animate={false}>
         <SidebarBody className="justify-between gap-5 bg-neutral-50 rounded-2xl border">
           <div className="flex flex-col overflow-y-auto overflow-x-hidden">
             <>
