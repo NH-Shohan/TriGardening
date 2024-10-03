@@ -35,6 +35,8 @@
     "next": "14.2.11",
     "next-themes": "^0.3.0",
     "novel": "^0.5.0",
+    "prosemirror-model": "^1.22.3",
+    "prosemirror-schema-basic": "^1.2.3",
     "react": "^18",
     "react-day-picker": "8.10.1",
     "react-dom": "^18",

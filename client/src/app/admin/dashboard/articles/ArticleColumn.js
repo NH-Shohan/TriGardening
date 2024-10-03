@@ -1,3 +1,4 @@
+import defaultImage from "@/assets/heroLeaf.svg";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,13 +12,15 @@ import {
 import {
   ArrowsDownUp,
   DotsThree,
+  Eye,
   EyeSlash,
   PencilSimpleLine,
   TrashSimple,
 } from "@phosphor-icons/react";
 import Image from "next/image";
+import Link from "next/link";
 
-export const columns = (handleDelete) => [
+export const columns = (handleDelete, handleStatus) => [
   {
     id: "select",
     header: ({ table }) => (
@@ -47,9 +50,9 @@ export const columns = (handleDelete) => [
       <div className="w-[150px]">
         <AspectRatio ratio={3 / 2} className="bg-transparent">
           <Image
-            src={row.original.files.url}
-            className="rounded-xl h-full w-full object-cover"
-            alt={row.original.files.name}
+            src={row.original.files.url || defaultImage}
+            className="rounded-xl h-full w-full object-cover border"
+            alt="Image Article"
             fill
           />
         </AspectRatio>
@@ -111,9 +114,9 @@ export const columns = (handleDelete) => [
     cell: ({ row }) => {
       const status = row.original.status;
       const statusClasses =
-        status === "Draft"
+        status === "draft"
           ? "bg-yellow-500/15 w-fit px-3 py-1 rounded-full text-yellow-500"
-          : status === "Hidden"
+          : status === "hidden"
           ? "bg-red-500/15 w-fit px-3 py-1 rounded-full text-red-500"
           : "bg-green-600/15 w-fit px-3 py-1 rounded-full text-green-600";
       return (
@@ -122,9 +125,9 @@ export const columns = (handleDelete) => [
         >
           <span
             className={`w-2 h-2 rounded-full ${
-              status === "Draft"
+              status === "draft"
                 ? "bg-yellow-500"
-                : status === "Hidden"
+                : status === "hidden"
                 ? "bg-red-500"
                 : "bg-green-600"
             }`}
@@ -139,19 +142,29 @@ export const columns = (handleDelete) => [
     cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="icon" variant="outline" className="rounded-full">
-            <span className="sr-only">Open menu</span>
+          <Button size="icon" variant="secondary" className="rounded-full">
             <DotsThree className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem className="gap-2 text-neutral-500">
-            <PencilSimpleLine className="h-4 w-4" />
-            Edit
+          <DropdownMenuItem className="gap-2 text-neutral-500" asChild>
+            <Link href={`/admin/dashboard/articles/${row.original.id}/edit`}>
+              <PencilSimpleLine className="h-4 w-4" />
+              Edit
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className="gap-2 text-neutral-500">
-            <EyeSlash className="h-4 w-4" />
-            Hide
+          <DropdownMenuItem
+            className="gap-2 text-neutral-500"
+            onClick={() => {
+              handleStatus(row.original.id, row.original.status);
+            }}
+          >
+            {row.original.status === "hidden" ? (
+              <Eye className="h-4 w-4" />
+            ) : (
+              <EyeSlash className="h-4 w-4" />
+            )}
+            {row.original.status === "hidden" ? "Visible" : "Hidden"}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem

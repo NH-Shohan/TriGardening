@@ -97,7 +97,7 @@ export function DataTable({ columns, data, loading }) {
   };
 
   const handlePost = () => {
-    router.push("/admin/dashboard/articles/post");
+    router.push("/admin/dashboard/articles/new");
   };
 
   return (
@@ -112,7 +112,6 @@ export function DataTable({ columns, data, loading }) {
                 table.getColumn("title")?.setFilterValue(event.target.value)
               }
               Icon={MagnifyingGlass}
-              className="w-[330px]"
             />
 
             <Select
@@ -194,7 +193,7 @@ export function DataTable({ columns, data, loading }) {
 
           <div className="flex items-center space-x-2">
             <Button
-              variant="outline"
+              variant="secondary"
               size="sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
@@ -202,7 +201,7 @@ export function DataTable({ columns, data, loading }) {
               Previous Page
             </Button>
             <Button
-              variant="outline"
+              variant="secondary"
               size="sm"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
