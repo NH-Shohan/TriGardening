@@ -32,7 +32,7 @@ const secondaryVariant = {
 };
 
 export const FileUpload = ({ onChange }) => {
-  const [file, setFile] = useState(null); // Change to single file object
+  const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleFileChange = (newFiles) => {

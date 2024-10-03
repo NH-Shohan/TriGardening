@@ -1,152 +1,33 @@
-"use client";
+import Category from "@/components/settings/Category";
+import Password from "@/components/settings/Password";
+import { Separator } from "@/components/ui/separator";
 
-import leafShing from "@/assets/leafShing.svg";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Eye, EyeSlash } from "@phosphor-icons/react";
-import Image from "next/image";
-import { useState } from "react";
-import { toast } from "sonner";
-
-const SettingsPage = () => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      toast.warning("All fields are required!");
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      toast.error("New password and confirm password do not match.");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        "http://localhost:3333/api/auth/change-password",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            currentPassword,
-            newPassword,
-            confirmNewPassword: confirmPassword,
-          }),
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Failed to change password");
-      }
-
-      toast.success(result.message);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
+const Settings = () => {
   return (
-    <div className="grid place-content-center h-full relative">
-      <Image
-        src={leafShing}
-        alt="leafShing"
-        className="absolute top-[30%] right-[10%]"
-        priority
-      />
-      <Image
-        src={leafShing}
-        alt="leafShing"
-        className="absolute top-[30%] left-[10%] scale-x-[-1]"
-        priority
-      />
-      <div className="space-y-8 border w-[380px] p-5 bg-neutral-50/50 backdrop-blur relative rounded-3xl">
-        <h4>Password Change</h4>
-        <form onSubmit={handleSubmit} className="space-y-4 w-full mt-5">
-          <div className="relative">
-            <Label>Current Password</Label>
-            <Input
-              type={showCurrentPassword ? "text" : "password"}
-              placeholder="Current password"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-              className="absolute right-3 top-9"
-            >
-              {showCurrentPassword ? (
-                <EyeSlash className="text-neutral-600" size={20} />
-              ) : (
-                <Eye className="text-neutral-600" size={20} />
-              )}
-            </button>
-          </div>
+    <div className="flex flex-col gap-10 h-full max-w-5xl">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 justify-between">
+        <div>
+          <h4>Change Password</h4>
+          <small className="text-neutral-400">
+            You can only change your password once every 24 hours
+          </small>
+        </div>
+        <Password />
+      </div>
 
-          <div className="relative">
-            <Label>New Password</Label>
-            <Input
-              type={showNewPassword ? "text" : "password"}
-              placeholder="New password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setShowNewPassword(!showNewPassword)}
-              className="absolute right-3 top-9"
-            >
-              {showNewPassword ? (
-                <EyeSlash className="text-neutral-600" size={20} />
-              ) : (
-                <Eye className="text-neutral-600" size={20} />
-              )}
-            </button>
-          </div>
+      <Separator />
 
-          <div className="relative">
-            <Label>Confirm New Password</Label>
-            <Input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm new password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-9"
-            >
-              {showConfirmPassword ? (
-                <EyeSlash className="text-neutral-600" size={20} />
-              ) : (
-                <Eye className="text-neutral-600" size={20} />
-              )}
-            </button>
-          </div>
-
-          <Button type="submit" className="w-full mt-5">
-            Change Password
-          </Button>
-        </form>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 justify-between">
+        <div>
+          <h4>Add Category</h4>
+          <small className="text-neutral-400">
+            Add a new category to the system
+          </small>
+        </div>
+        <Category />
       </div>
     </div>
   );
 };
 
-export default SettingsPage;
+export default Settings;

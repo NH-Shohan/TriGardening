@@ -1,6 +1,10 @@
 "use client";
 
-import { deleteProduct, getAllProducts } from "@/lib/apiService";
+import {
+  deleteProduct,
+  getAllProducts,
+  updateArticleStatus,
+} from "@/lib/apiService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { columns } from "./ArticleColumn";
@@ -36,6 +40,19 @@ export default function ArticlesPage() {
     }
   };
 
+  const handleStatus = async (id, status) => {
+    const newStatus = status === "hidden" ? "visible" : "hidden";
+
+    try {
+      await updateArticleStatus(id, newStatus);
+      toast.success("Article status updated successfully");
+      await fetchData();
+    } catch (error) {
+      console.error("Error in handleStatus:", error);
+      toast.error(`Error updating article status: ${error.message}`);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await getAllProducts();
@@ -47,7 +64,7 @@ export default function ArticlesPage() {
 
   return (
     <DataTable
-      columns={columns(handleDelete)}
+      columns={columns(handleDelete, handleStatus)}
       data={data}
       onDelete={handleDelete}
       loading={loading}

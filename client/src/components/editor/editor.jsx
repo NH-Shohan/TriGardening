@@ -29,6 +29,9 @@ import {
 } from "@/components/editor/slash-command";
 
 import { Separator } from "@/components/ui/separator";
+import DOMPurify from "dompurify";
+import { DOMParser as ProseMirrorDOMParser } from "prosemirror-model";
+import { schema } from "prosemirror-schema-basic";
 
 const extensions = [...defaultExtensions, slashCommand];
 
@@ -42,11 +45,22 @@ export const defaultEditorContent = {
   ],
 };
 
+const convertHtmlToProseMirror = (html) => {
+  const sanitizedHtml = DOMPurify.sanitize(html);
+  const domParser = new window.DOMParser();
+  const tempElement = domParser.parseFromString(sanitizedHtml, "text/html");
+  const doc = ProseMirrorDOMParser.fromSchema(schema).parse(tempElement.body);
+
+  return doc.toJSON();
+};
+
 export default function Editor({ initialValue, onChange }) {
   const [openNode, setOpenNode] = useState(false);
   const [openColor, setOpenColor] = useState(false);
   const [openLink, setOpenLink] = useState(false);
   const [openAI, setOpenAI] = useState(false);
+
+  const initialProseMirrorContent = convertHtmlToProseMirror(initialValue);
 
   const highlightCodeblocks = (content) => {
     const doc = new DOMParser().parseFromString(content, "text/html");
@@ -84,8 +98,8 @@ export default function Editor({ initialValue, onChange }) {
     <div className="relative w-full max-w-screen-lg">
       <EditorRoot>
         <EditorContent
-          immediatelyRender={false}
-          initialContent={initialValue}
+          immediatelyRender={true}
+          initialContent={initialProseMirrorContent}
           extensions={extensions}
           editorProps={{
             handleDOMEvents: {

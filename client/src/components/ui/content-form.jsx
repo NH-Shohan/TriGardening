@@ -2,7 +2,9 @@
 
 import Editor from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import DOMPurify from "dompurify"; // Optional for sanitizing HTML
+import { DOMParser as ProseMirrorDOMParser } from "prosemirror-model";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export const defaultValue = {
@@ -15,30 +17,48 @@ export const defaultValue = {
   ],
 };
 
-export default function ContentForm({ onSubmit }) {
-  const [content, setContent] = useState("");
-  const [pending, setPending] = useState(false);
+export default function ContentForm({
+  onSubmit,
+  content: parentContent,
+  onChange,
+  isEditing,
+  editorSchema, // ProseMirror schema should be passed as prop
+}) {
+  const [localContent, setLocalContent] = useState(
+    parentContent || defaultValue
+  );
 
-  async function handleSubmit() {
-    setPending(true);
+  const handleContentChange = (newContent) => {
+    setLocalContent(newContent);
+    onChange(newContent);
+  };
 
-    const result = { success: true };
+  useEffect(() => {
+    if (parentContent && editorSchema) {
+      try {
+        const sanitizedHtml = DOMPurify.sanitize(parentContent);
+        const domParser = new DOMParser();
+        const parsedHtml = domParser.parseFromString(
+          sanitizedHtml,
+          "text/html"
+        );
 
-    if (!result.success) {
-      toast.error("Error occurred.");
-    } else {
-      toast.success("Article created successfully!");
-      onSubmit(content);
+        const structuredContent = ProseMirrorDOMParser.fromSchema(
+          editorSchema
+        ).parse(parsedHtml.body);
+
+        setLocalContent(structuredContent.toJSON());
+      } catch (error) {
+        toast.error("Error converting HTML to editor format");
+      }
     }
-
-    setPending(false);
-  }
+  }, [parentContent, editorSchema]);
 
   return (
     <div className="mt-6 flex max-w-2xl mx-auto flex-col gap-4">
-      <Editor initialValue={defaultValue} onChange={setContent} />
-      <Button onClick={handleSubmit} disabled={pending}>
-        {pending ? "Submitting..." : "Create"}
+      <Editor initialValue={localContent} onChange={handleContentChange} />
+      <Button onClick={() => onSubmit()}>
+        {isEditing ? "Update" : "Create"}
       </Button>
     </div>
   );
