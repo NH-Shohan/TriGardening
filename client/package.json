@@ -48,6 +48,8 @@
     "tiptap-extension-global-drag-handle": "^0.1.13"
   },
   "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/json-schema": "^7.0.15",
     "concurrently": "^9.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
