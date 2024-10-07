@@ -5,6 +5,8 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -23,6 +25,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  deleteReview,
+  getAllReviews,
+  postReview,
+  updateReview,
+} from "@/lib/apiService";
 import { cn } from "@/lib/utils";
 import {
   DotsThree,
@@ -32,17 +40,32 @@ import {
 } from "@phosphor-icons/react";
 import { format } from "date-fns";
 import Image from "next/image";
-import { useState } from "react";
-import reviews from "../../../../data/reviews.json";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const ReviewsPage = () => {
   const [open, setOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState({
     name: "",
     date: null,
     review: "",
     avatar: null,
   });
+  const [editId, setEditId] = useState(null);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const reviews = await getAllReviews();
+        setReviews(reviews);
+      } catch (error) {
+        toast.error("Error fetching reviews!");
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +79,10 @@ const ReviewsPage = () => {
     }));
   };
 
+  const formattedDate = (date) => {
+    return date ? format(new Date(date), "MMMM d, yyyy") : "Pick a date";
+  };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -64,9 +91,46 @@ const ReviewsPage = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("New review added: ", newReview);
-    setOpen(false);
+  const handleSubmit = async () => {
+    try {
+      if (editId) {
+        await updateReview(editId, newReview);
+        toast.success("Review updated successfully!");
+      } else {
+        await postReview(newReview);
+        toast.success("Review added successfully!");
+      }
+
+      setOpen(false);
+      setEditId(null);
+      setNewReview({ name: "", date: null, review: "", avatar: null });
+      const updatedReviews = await getAllReviews();
+      setReviews(updatedReviews);
+    } catch (error) {
+      toast.error("Error adding/updating review!");
+    }
+  };
+
+  const handleEdit = (review) => {
+    setEditId(review.id);
+    setNewReview({
+      name: review.name,
+      date: new Date(review.date),
+      review: review.review,
+      avatar: review.avatar,
+    });
+    setOpen(true);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteReview(id);
+      const updatedReviews = await getAllReviews();
+      setReviews(updatedReviews);
+      toast.success("Review deleted successfully!");
+    } catch (error) {
+      toast.error("Error deleting review!");
+    }
   };
 
   return (
@@ -84,9 +148,12 @@ const ReviewsPage = () => {
             onEscapeKeyDown={(e) => e.preventDefault()}
             onInteractOutside={(e) => e.preventDefault()}
           >
-            <DialogTitle asChild>
-              <h4>Add New Review</h4>
-            </DialogTitle>
+            <DialogHeader>
+              <DialogTitle asChild>
+                <h4>{editId ? "Edit Review" : "Add New Review"}</h4>
+              </DialogTitle>
+              <DialogDescription />
+            </DialogHeader>
 
             <div className="space-y-2">
               <div>
@@ -111,9 +178,7 @@ const ReviewsPage = () => {
                         !newReview.date && "text-neutral-400 font-normal"
                       )}
                     >
-                      {newReview.date
-                        ? format(newReview.date, "PPP")
-                        : "Pick a date"}
+                      {formattedDate(newReview.date)}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
@@ -150,7 +215,7 @@ const ReviewsPage = () => {
                     <Image
                       src={newReview.avatar}
                       alt="Avatar preview"
-                      className="rounded-full object-cover border"
+                      className="rounded-full object-cover border w-auto h-auto"
                       width={80}
                       height={80}
                     />
@@ -160,14 +225,14 @@ const ReviewsPage = () => {
             </div>
 
             <Button className="mt-4" onClick={handleSubmit}>
-              Add Review
+              {editId ? "Update Review" : "Add Review"}
             </Button>
           </DialogContent>
         </Dialog>
 
-        {reviews.map(({ name, date, review, avatar }, index) => (
+        {reviews.map(({ id, name, date, review, avatar }) => (
           <div
-            key={index}
+            key={id}
             className="relative bg-neutral-50 w-full h-[200px] p-5 rounded-xl border"
           >
             <div className="absolute top-3 right-3">
@@ -175,19 +240,27 @@ const ReviewsPage = () => {
                 <DropdownMenuTrigger asChild>
                   <Button
                     size="icon"
-                    variant="outline"
+                    variant="secondary"
                     className="rounded-full"
                   >
                     <DotsThree className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem className="gap-2 text-neutral-500">
+                  <DropdownMenuItem
+                    className="gap-2 text-neutral-500"
+                    onClick={() =>
+                      handleEdit({ id, name, date, review, avatar })
+                    }
+                  >
                     <PencilSimpleLine className="h-4 w-4" />
                     Edit
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="gap-2 text-red-500 focus:text-red-600 focus:bg-red-50">
+                  <DropdownMenuItem
+                    className="gap-2 text-red-500 focus:text-red-600 focus:bg-red-50"
+                    onClick={() => handleDelete(id)}
+                  >
                     <Trash className="h-4 w-4" />
                     Delete
                   </DropdownMenuItem>
@@ -205,7 +278,9 @@ const ReviewsPage = () => {
               />
               <div>
                 <h3 className="text-lg font-bold">{name}</h3>
-                <p className="text-sm text-neutral-500">{date}</p>
+                <p className="text-sm text-neutral-500">
+                  {formattedDate(date)}
+                </p>
               </div>
             </div>
 

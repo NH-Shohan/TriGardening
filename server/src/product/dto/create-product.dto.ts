@@ -1,19 +1,16 @@
-import { IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsObject, IsOptional, IsString } from 'class-validator';
 
 export class CreateProductDto {
   @IsObject()
-  @IsNotEmpty()
   files: {
     name: string;
     url: string;
   };
 
   @IsString()
-  @IsNotEmpty()
   title: string;
 
   @IsString()
-  @IsNotEmpty()
   slug: string;
 
   @IsString()
@@ -25,9 +22,7 @@ export class CreateProductDto {
   status: string;
 
   @IsString()
-  @IsNotEmpty()
   content: string;
 
-  @IsNotEmpty()
   categoryId: number;
 }
