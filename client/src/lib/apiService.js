@@ -136,3 +136,68 @@ export const editCategory = async (id, categoryName) => {
   });
   if (!response.ok) throw new Error("Failed to edit category");
 };
+
+// Videos
+
+export const getAllVideos = async () => {
+  const response = await fetch(`${API_URL}/video`);
+  if (!response.ok) throw new Error("Failed to fetch videos");
+  return response.json();
+};
+
+export const getVideoById = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/video/${id}`);
+    if (!response.ok) throw new Error("Failed to fetch video");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const postVideo = async (video) => {
+  try {
+    const response = await fetch(`${API_URL}/video`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(video),
+      credentials: "include",
+    });
+
+    if (!response.ok) throw new Error("Failed to post video");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const updateVideo = async (id, data) => {
+  try {
+    const response = await fetch(`${API_URL}/video/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) throw new Error("Failed to update video");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const deleteVideo = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/video/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) throw new Error("Failed to delete video");
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
