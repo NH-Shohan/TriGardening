@@ -22,7 +22,7 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   async login(@Body() data: LoginDTO, @Session() session) {
     const user = await this.userService.login(data);
-    console.log(user);
+    
   
     if (user) {
       const identifier = user.email ? user.email : user.phone;

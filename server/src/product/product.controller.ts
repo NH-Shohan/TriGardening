@@ -36,7 +36,6 @@ export class ProductController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    console.log('Received update DTO:', updateProductDto);
     return this.productService.update(id, updateProductDto);
   }
 

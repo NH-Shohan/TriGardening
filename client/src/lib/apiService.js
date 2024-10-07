@@ -18,7 +18,6 @@ export const getProductById = async (id) => {
 };
 
 export const updateProduct = async (id, data) => {
-  console.log("Data in updateProduct: ", data);
   try {
     const response = await fetch(`${API_URL}/products/${id}`, {
       method: "PATCH",
@@ -103,7 +102,7 @@ export const postCategories = async (categoryName) => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    console.log(errorData);
+
     if (errorData.message.includes("duplicate")) {
       throw new Error("Category already exists");
     }

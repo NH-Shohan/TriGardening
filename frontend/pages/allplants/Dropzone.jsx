@@ -62,8 +62,6 @@ const Dropzone = ({ className }) => {
       method: "POST",
       body: formData,
     }).then((res) => res.json());
-
-    console.log(data);
   };
 
   return (

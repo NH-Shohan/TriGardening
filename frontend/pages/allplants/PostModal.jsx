@@ -13,10 +13,7 @@ const PostModal = () => {
     setText(event.target.value);
   };
 
-  const handlePostClick = () => {
-    console.log("Text:", text);
-    console.log("Image:", selectedImage);
-  };
+  const handlePostClick = () => {};
 
   return (
     <div className="text-base mt-5 w-[40vw]">
