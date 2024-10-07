@@ -32,6 +32,7 @@ import { Separator } from "@/components/ui/separator";
 import DOMPurify from "dompurify";
 import { DOMParser as ProseMirrorDOMParser } from "prosemirror-model";
 import { schema } from "prosemirror-schema-basic";
+import { toast } from "sonner";
 
 const extensions = [...defaultExtensions, slashCommand];
 
@@ -40,27 +41,59 @@ export const defaultEditorContent = {
   content: [
     {
       type: "paragraph",
-      content: [],
     },
   ],
 };
 
 const convertHtmlToProseMirror = (html) => {
-  const sanitizedHtml = DOMPurify.sanitize(html);
-  const domParser = new window.DOMParser();
-  const tempElement = domParser.parseFromString(sanitizedHtml, "text/html");
-  const doc = ProseMirrorDOMParser.fromSchema(schema).parse(tempElement.body);
+  if (!html) {
+    return defaultEditorContent;
+  }
 
-  return doc.toJSON();
+  try {
+    const sanitizedHtml = DOMPurify.sanitize(html);
+    const domParser = new window.DOMParser();
+    const tempElement = domParser.parseFromString(sanitizedHtml, "text/html");
+
+    if (!tempElement.body.textContent.trim()) {
+      return defaultEditorContent;
+    }
+
+    const doc = ProseMirrorDOMParser.fromSchema(schema).parse(tempElement.body);
+    return doc.toJSON();
+  } catch (error) {
+    console.error("Error converting HTML to ProseMirror:", error);
+    return defaultEditorContent;
+  }
 };
 
 export default function Editor({ initialValue, onChange }) {
+  console.log(initialValue);
   const [openNode, setOpenNode] = useState(false);
   const [openColor, setOpenColor] = useState(false);
   const [openLink, setOpenLink] = useState(false);
   const [openAI, setOpenAI] = useState(false);
 
-  const initialProseMirrorContent = convertHtmlToProseMirror(initialValue);
+  const getInitialContent = () => {
+    if (!initialValue) return defaultEditorContent;
+
+    if (typeof initialValue === "object" && initialValue.type === "doc") {
+      return initialValue;
+    }
+
+    if (typeof initialValue === "string") {
+      try {
+        const initialProseMirrorContent =
+          convertHtmlToProseMirror(initialValue);
+        return initialProseMirrorContent;
+      } catch (error) {
+        toast.error("Error parsing initial content!");
+        return initialProseMirrorContent;
+      }
+    }
+
+    return initialProseMirrorContent;
+  };
 
   const highlightCodeblocks = (content) => {
     const doc = new DOMParser().parseFromString(content, "text/html");
@@ -99,7 +132,7 @@ export default function Editor({ initialValue, onChange }) {
       <EditorRoot>
         <EditorContent
           immediatelyRender={true}
-          initialContent={initialProseMirrorContent}
+          initialContent={getInitialContent()}
           extensions={extensions}
           editorProps={{
             handleDOMEvents: {
