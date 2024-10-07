@@ -2,7 +2,7 @@
 
 import Editor from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
-import DOMPurify from "dompurify"; // Optional for sanitizing HTML
+import DOMPurify from "dompurify";
 import { DOMParser as ProseMirrorDOMParser } from "prosemirror-model";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -22,7 +22,7 @@ export default function ContentForm({
   content: parentContent,
   onChange,
   isEditing,
-  editorSchema, // ProseMirror schema should be passed as prop
+  editorSchema,
 }) {
   const [localContent, setLocalContent] = useState(
     parentContent || defaultValue

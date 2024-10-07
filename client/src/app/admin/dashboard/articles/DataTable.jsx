@@ -260,7 +260,7 @@ export function DataTable({ columns, data, loading }) {
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
-                    className="h-24 text-center"
+                    className="h-24 text-center text-2xl"
                   >
                     No results.
                   </TableCell>

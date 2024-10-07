@@ -3,12 +3,21 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 import {
   ArrowsDownUp,
   DotsThree,
@@ -19,6 +28,7 @@ import {
 } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export const columns = (handleDelete, handleStatus) => [
   {
@@ -51,7 +61,7 @@ export const columns = (handleDelete, handleStatus) => [
         <AspectRatio ratio={3 / 2} className="bg-transparent">
           <Image
             src={row.original.files.url || defaultImage}
-            className="rounded-xl h-full w-full object-cover border"
+            className="rounded-xl h-auto w-auto  object-cover border"
             alt="Image Article"
             fill
           />
@@ -139,43 +149,82 @@ export const columns = (handleDelete, handleStatus) => [
   },
   {
     id: "actions",
-    cell: ({ row }) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size="icon" variant="secondary" className="rounded-full">
-            <DotsThree className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem className="gap-2 text-neutral-500" asChild>
-            <Link href={`/admin/dashboard/articles/${row.original.id}/edit`}>
-              <PencilSimpleLine className="h-4 w-4" />
-              Edit
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="gap-2 text-neutral-500"
-            onClick={() => {
-              handleStatus(row.original.id, row.original.status);
-            }}
-          >
-            {row.original.status === "hidden" ? (
-              <Eye className="h-4 w-4" />
-            ) : (
-              <EyeSlash className="h-4 w-4" />
-            )}
-            {row.original.status === "hidden" ? "Visible" : "Hidden"}
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => handleDelete(row.original.id)}
-            className="gap-2 text-red-500 focus:text-red-600 focus:bg-red-50"
-          >
-            <TrashSimple className="h-4 w-4" />
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+    cell: ({ row }) => {
+      const [dialogOpen, setDialogOpen] = useState(false);
+
+      const handleDeleteClick = () => {
+        handleDelete(row.original.id);
+        setDialogOpen(false);
+      };
+
+      return (
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="icon" variant="secondary" className="rounded-full">
+                <DotsThree className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem className="gap-2 text-neutral-500" asChild>
+                <Link
+                  href={`/admin/dashboard/articles/${row.original.id}/edit`}
+                >
+                  <PencilSimpleLine className="h-4 w-4" />
+                  Edit
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="gap-2 text-neutral-500"
+                onClick={() => {
+                  handleStatus(row.original.id, row.original.status);
+                }}
+              >
+                {row.original.status === "hidden" ? (
+                  <Eye className="h-4 w-4" />
+                ) : (
+                  <EyeSlash className="h-4 w-4" />
+                )}
+                {row.original.status === "hidden" ? "Visible" : "Hidden"}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => setDialogOpen(true)}
+                className="gap-2 text-red-500 focus:text-red-600 focus:bg-red-50"
+              >
+                <TrashSimple className="h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>
+                  <p className="text-xl font-medium">Confirm Deletion</p>
+                </DialogTitle>
+                <Separator />
+                <DialogDescription>
+                  Are you sure you want to delete this item? This action cannot
+                  be undone.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Button
+                  variant="secondary"
+                  onClick={() => setDialogOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button variant="destructive" onClick={handleDeleteClick}>
+                  Delete
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </>
+      );
+    },
   },
 ];
