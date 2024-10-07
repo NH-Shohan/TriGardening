@@ -4,8 +4,9 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -30,8 +31,12 @@ export class ProductController {
     return this.productService.create(createProductDto);
   }
 
-  @Put(':id')
-  update(@Param('id') id: number, @Body() updateProductDto: UpdateProductDto) {
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateProductDto: UpdateProductDto,
+  ) {
+    console.log('Received update DTO:', updateProductDto);
     return this.productService.update(id, updateProductDto);
   }
 

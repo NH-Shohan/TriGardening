@@ -201,3 +201,60 @@ export const deleteVideo = async (id) => {
     throw new Error(error.message);
   }
 };
+
+// Review
+
+export const getAllReviews = async () => {
+  const response = await fetch(`${API_URL}/review`);
+  if (!response.ok) throw new Error("Failed to fetch reviews");
+  return response.json();
+};
+
+export const postReview = async (reviewData) => {
+  try {
+    const response = await fetch(`${API_URL}/review`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviewData),
+    });
+    if (!response.ok) throw new Error("Failed to add review");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getReviewById = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/review/${id}`);
+    if (!response.ok) throw new Error("Failed to fetch review");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const deleteReview = async (id) => {
+  const response = await fetch(`${API_URL}/review/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Failed to delete review");
+};
+
+export const updateReview = async (id, updatedData) => {
+  try {
+    const response = await fetch(`${API_URL}/review/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    if (!response.ok) throw new Error("Failed to update review");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
