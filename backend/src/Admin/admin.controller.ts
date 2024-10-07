@@ -24,7 +24,7 @@ export class AdminController {
   @UsePipes(new ValidationPipe())
   async login(@Body() data: LoginDTO, @Session() session) {
     const user = await this.adminService.login(data);
-    console.log(user);
+    
   
     if (user) {
       const identifier = user.email ? user.email : user.phone;
@@ -64,7 +64,7 @@ export class AdminController {
   async addProduct(@Body() createProductDto: CreateProductDto, @UploadedFiles() photos: Express.Multer.File[]) {
     // Attach the uploaded images to the DTO
     createProductDto.photos = photos.map(photo => photo.filename);
-    console.log('Received data:', createProductDto);
+    
     return this.adminService.addProduct(createProductDto);
   }
 

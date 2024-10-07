@@ -68,7 +68,6 @@ const convertHtmlToProseMirror = (html) => {
 };
 
 export default function Editor({ initialValue, onChange }) {
-  console.log(initialValue);
   const [openNode, setOpenNode] = useState(false);
   const [openColor, setOpenColor] = useState(false);
   const [openLink, setOpenLink] = useState(false);

@@ -38,8 +38,6 @@ export class ProductService {
       where: { id },
     });
 
-    console.log('Product before update:', product);
-
     if (!product) {
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
@@ -80,9 +78,7 @@ export class ProductService {
       product.category = category;
     }
 
-    console.log('Updated product before save:', product);
     const savedProduct = await this.productRepo.save(product);
-    console.log('Saved product:', savedProduct);
 
     return savedProduct;
   }

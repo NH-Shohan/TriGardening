@@ -87,8 +87,6 @@ const ArticleForm = ({ productId }) => {
           isEditing ? getProductById(productId) : Promise.resolve(null),
         ]);
 
-        console.log(productData);
-
         setCategories(fetchedCategories);
 
         if (productData) {

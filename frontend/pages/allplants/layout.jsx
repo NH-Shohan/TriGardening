@@ -7,7 +7,6 @@ const AllPlantsLayout = ({ children }) => {
   const [isOpen, toggle] = useState(false);
 
   function handlOpenModal(open) {
-    console.log("close modal");
     toggle(open);
   }
 

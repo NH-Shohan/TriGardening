@@ -42,7 +42,6 @@ export class AdminController {
   @UsePipes(new ValidationPipe())
   async login(@Body() data: LoginDTO) {
     const user = await this.adminService.login(data);
-    console.log(user);
 
     if (user) {
       const identifier = user.email ? user.email : user.phone;

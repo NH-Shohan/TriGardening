@@ -14,7 +14,7 @@ export class AuthController {
   @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleLogin() {
-    console.log('Executing Google Login Middleware');
+    
   }
   
 

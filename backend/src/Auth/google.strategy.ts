@@ -29,7 +29,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     profile: any,
     done: VerifyCallback,
   ): Promise<any> {
-    console.log('Google Profile:', profile);
+    
     const { name, email, picture } = profile._json;
 
     const user = await this.userService.findOrCreateGoogleUser(
