@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminModule } from './Admin/admin.module';
 import { AuthModule } from './auth/auth.module';
@@ -12,15 +12,15 @@ import { VideoModule } from './video/video.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'password',
-      database: 'TriGardening',
-      autoLoadEntities: true,
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        url: configService.get<string>('DATABASE_URL'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
     AdminModule,
     ProductModule,
