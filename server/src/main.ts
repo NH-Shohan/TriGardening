@@ -5,13 +5,18 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
   app.use(cookieParser());
   app.enableCors({
-    origin: 'https://trigardeningbd.vercel.app/',
+    origin:
+      configService.get('FRONTEND_URL') || 'https://trigardeningbd.vercel.app',
     credentials: true,
   });
   app.setGlobalPrefix('api');
-  const configService = app.get(ConfigService);
-  await app.listen(configService.get('PORT') || 3333);
+
+  const port = configService.get('PORT') || 3333;
+  await app.listen(port);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
