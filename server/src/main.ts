@@ -7,13 +7,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
+  const allowedOrigins = configService.get('ALLOWED_ORIGINS')?.split(',') || [
+    'https://trigardeningbd.vercel.app',
+    'http://localhost:3000',
+  ];
+
   app.use(cookieParser());
   app.enableCors({
-    origin:
-      configService.get('ALLOWED_ORIGINS') ||
-      'https://trigardeningbd.vercel.app',
+    origin: allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   });
   app.setGlobalPrefix('api');
 

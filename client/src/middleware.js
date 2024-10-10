@@ -5,13 +5,13 @@ export function middleware(request) {
 
   const isProtectedAdminRoute = path.startsWith("/admin/") && path !== "/admin";
 
-  const authCookie = request.cookies.get("access_token");
+  const token = request.cookies.get("access_token");
 
-  if (isProtectedAdminRoute && !authCookie) {
+  if (isProtectedAdminRoute && !token) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  if (authCookie && path === "/admin") {
+  if (token && path === "/admin") {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 

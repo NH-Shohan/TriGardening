@@ -56,22 +56,11 @@ export default function DashboardLayout({ children }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success(data.message);
-        router.push("/admin");
-      } else {
-        throw new Error("Error during logout");
-      }
+      localStorage.removeItem("access_token");
+      document.cookie =
+        "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+      router.push("/admin");
+      toast.success("See you soon!");
     } catch (error) {
       toast.error(error.message);
     }
