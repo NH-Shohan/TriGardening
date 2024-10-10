@@ -43,15 +43,13 @@ const AdminPage = () => {
         }
       );
 
-      console.log(response);
+      router.replace("/admin/dashboard");
+      toast.success("Login successful");
+      setLoading(false);
 
       if (!response.ok) {
         throw new Error("Email or password is incorrect");
       }
-
-      toast.success("Login successful");
-      setLoading(false);
-      router.push("/admin/dashboard");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
