@@ -37,14 +37,16 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="flex justify-center mt-12">
-          <Input
-            placeholder="example@gmail.com"
-            className="w-full md:w-[320px] rounded-tl-full rounded-bl-full bg-gray-50 px-4 focus-visible:ring-0"
-          />
-          <Button className="rounded-tr-full rounded-br-full bg-green-300 text-green-900 hover:text-green-50">
-            Join Now
-          </Button>
+        <div className="flex justify-center w-full">
+          <div className="flex justify-center w-fit mt-12">
+            <Input
+              placeholder="example@gmail.com"
+              className="w-full md:w-[320px] rounded-tl-full rounded-bl-full bg-gray-50 px-4 focus-visible:ring-0"
+            />
+            <Button className="rounded-tr-full rounded-br-full bg-green-300 text-green-900 hover:text-green-50">
+              Join Now
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 px-5 justify-center w-full md:w-fit mx-auto mt-12 gap-4">

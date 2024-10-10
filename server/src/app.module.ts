@@ -12,19 +12,31 @@ import { VideoModule } from './video/video.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        url: configService.get<string>('DATABASE_URL'),
-        autoLoadEntities: true,
-        synchronize: true,
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      }),
-      inject: [ConfigService],
-    }),
+    process.env.NODE_ENV === 'production'
+      ? TypeOrmModule.forRootAsync({
+          imports: [ConfigModule],
+          useFactory: (configService: ConfigService) => ({
+            type: 'postgres',
+            url: configService.get<string>('DATABASE_URL'),
+            autoLoadEntities: true,
+            synchronize: true,
+            ssl: {
+              rejectUnauthorized: false,
+            },
+          }),
+          inject: [ConfigService],
+        })
+      : process.env.NODE_ENV === 'development' &&
+        TypeOrmModule.forRoot({
+          type: 'postgres',
+          host: 'localhost',
+          port: 5432,
+          username: 'postgres',
+          password: 'password',
+          database: 'TriGardening',
+          autoLoadEntities: true,
+          synchronize: true,
+        }),
     AdminModule,
     ProductModule,
     VideoModule,
