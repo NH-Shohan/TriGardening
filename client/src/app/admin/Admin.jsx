@@ -31,14 +31,19 @@ const AdminPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3333/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+          credentials: "include",
+        }
+      );
+
+      console.log(response);
 
       if (!response.ok) {
         throw new Error("Email or password is incorrect");
