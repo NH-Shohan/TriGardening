@@ -25,6 +25,7 @@ export const updateProduct = async (id, data) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     });
     if (!response.ok) throw new Error("Failed to update product");
     return await response.json();
@@ -73,6 +74,7 @@ export const updateArticleStatus = async (id, status) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ status }),
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -132,6 +134,7 @@ export const editCategory = async (id, categoryName) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name: categoryName }),
+    credentials: "include",
   });
   if (!response.ok) throw new Error("Failed to edit category");
 };
@@ -180,6 +183,7 @@ export const updateVideo = async (id, data) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     });
 
     if (!response.ok) throw new Error("Failed to update video");
@@ -217,6 +221,7 @@ export const postReview = async (reviewData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(reviewData),
+      credentials: "include",
     });
     if (!response.ok) throw new Error("Failed to add review");
     return await response.json();
@@ -250,7 +255,9 @@ export const updateReview = async (id, updatedData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
+      credentials: "include",
     });
+
     if (!response.ok) throw new Error("Failed to update review");
     return await response.json();
   } catch (error) {
