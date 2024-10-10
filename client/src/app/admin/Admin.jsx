@@ -43,7 +43,8 @@ const AdminPage = () => {
         }
       );
 
-      router.replace("/admin/dashboard");
+      router.refresh();
+      router.push("/admin/dashboard");
       toast.success("Login successful");
       setLoading(false);
 
