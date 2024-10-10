@@ -91,7 +91,6 @@ export function DataTable({ columns, data, loading }) {
 
       toast.success("Products deleted successfully");
     } catch (error) {
-      console.error("Error deleting products:", error);
       toast.error(`Error deleting products: ${error.message}`);
     }
   };
