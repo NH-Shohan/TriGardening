@@ -30,7 +30,7 @@ import { CaretLeft, Dot, NotePencil } from "@phosphor-icons/react";
 import { Bricolage_Grotesque } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -282,12 +282,14 @@ const ArticleForm = ({ productId }) => {
       <Separator />
 
       <div className="w-full h-full">
-        <ContentForm
-          content={editorContent}
-          onChange={handleContentChange}
-          onSubmit={handleCreate}
-          isEditing={isEditing}
-        />
+        <Suspense fallback={<div>Loading editor...</div>}>
+          <ContentForm
+            content={editorContent}
+            onChange={handleContentChange}
+            onSubmit={handleCreate}
+            isEditing={isEditing}
+          />
+        </Suspense>
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
