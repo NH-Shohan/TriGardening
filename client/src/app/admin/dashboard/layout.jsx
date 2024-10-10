@@ -4,6 +4,7 @@ import logoSingle from "@/assets/logoSingle.svg";
 import { Separator } from "@/components/ui/separator";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import { ArrowBendUpLeft } from "@phosphor-icons/react";
 import {
   Article,
   GearSix,
@@ -60,7 +61,7 @@ export default function DashboardLayout({ children }) {
       document.cookie =
         "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
       router.push("/admin");
-      toast.success("See you soon!");
+      toast.success("See you soon");
     } catch (error) {
       toast.error(error.message);
     }
@@ -88,15 +89,25 @@ export default function DashboardLayout({ children }) {
               ))}
             </div>
           </div>
-          <div className="group transition-all">
-            <Separator className={"group-hover:opacity-0"} />
+          <div className="group/logout group/back transition-all">
+            <Separator className={"group-hover/back:opacity-0"} />
             <SidebarLink
-              className={"hover:bg-red-500/10 hover:text-red-500"}
+              className={"hover/back:bg-blue-500/10 hover/back:text-blue-500"}
+              link={{
+                label: "Back to Home",
+                href: "/",
+                Icon: (
+                  <ArrowBendUpLeft className="w-6 h-6 hover/back:text-blue-500" />
+                ),
+              }}
+            />
+            <SidebarLink
+              className={"hover/logout:bg-red-500/10 hover/logout:text-red-500"}
               onClick={handleLogout}
               link={{
                 label: "Log Out",
                 href: "/admin",
-                Icon: <SignOut className="w-6 h-6 group-hover:text-red-500" />,
+                Icon: <SignOut className="w-6 h-6 hover/logout:text-red-500" />,
               }}
             />
           </div>
