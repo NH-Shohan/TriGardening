@@ -8,7 +8,12 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.use(cookieParser());
-  app.enableCors();
+  app.enableCors({
+    origin: '*' || 'https://trigardeningbd.vercel.app',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  });
   app.setGlobalPrefix('api');
 
   const port = configService.get('PORT') || 3333;
