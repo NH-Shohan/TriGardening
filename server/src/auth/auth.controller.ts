@@ -54,10 +54,4 @@ export class AuthController {
   ) {
     return this.authService.changePassword(userId, changePasswordDto);
   }
-
-  @Post('logout')
-  logout(@Res() res: Response) {
-    res.clearCookie('access_token', { path: '/' });
-    return res.status(200).json({ message: 'See you soon!' });
-  }
 }

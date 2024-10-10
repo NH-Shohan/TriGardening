@@ -39,20 +39,24 @@ const AdminPage = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-          credentials: "include",
         }
       );
 
-      router.refresh();
-      router.push("/admin/dashboard");
-      toast.success("Login successful");
-      setLoading(false);
+      if (response.ok) {
+        const result = await response.json();
+        const token = result.access_token;
 
-      if (!response.ok) {
+        localStorage.setItem("access_token", token);
+        document.cookie = `access_token=${token}; path=/;`;
+
+        toast.success("Login successful");
+        router.push("/admin/dashboard");
+      } else {
         throw new Error("Email or password is incorrect");
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
       setLoading(false);
     }
   };

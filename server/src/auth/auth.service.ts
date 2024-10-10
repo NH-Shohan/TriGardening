@@ -30,15 +30,9 @@ export class AuthService {
       const payload = { email: user.email, sub: user.id, role: user.role };
       const token = this.jwtService.sign(payload);
 
-      res.cookie('access_token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
-
       return res.send({
         message: 'Login successful',
+        access_token: token,
       });
     }
 
@@ -89,10 +83,5 @@ export class AuthService {
     await this.usersRepository.save(user);
 
     return { message: 'Password changed successfully' };
-  }
-
-  async logout(res: Response) {
-    res.clearCookie('jwt');
-    return { message: 'Logout successful' };
   }
 }
