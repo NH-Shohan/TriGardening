@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from '../category/category.entity';
+import { CloudinaryService } from './cloudinary.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './product.entity';
@@ -11,6 +12,7 @@ export class ProductService {
   constructor(
     @InjectRepository(Product) private productRepo: Repository<Product>,
     @InjectRepository(Category) private categoryRepo: Repository<Category>,
+    private cloudinaryService: CloudinaryService,
   ) {}
 
   async findAll() {
@@ -24,12 +26,21 @@ export class ProductService {
     });
   }
 
-  async create(createProductDto: CreateProductDto) {
+  async create(createProductDto: CreateProductDto, file: Express.Multer.File) {
     const { categoryId, ...productData } = createProductDto;
+
+    const uploadedImage = await this.cloudinaryService.uploadImage(file);
+
     const category = await this.categoryRepo.findOne({
       where: { id: categoryId },
     });
-    const product = this.productRepo.create({ ...productData, category });
+
+    const product = this.productRepo.create({
+      ...productData,
+      category,
+      files: uploadedImage,
+    });
+
     return this.productRepo.save(product);
   }
 

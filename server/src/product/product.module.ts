@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryController } from '../category/category.controller';
 import { Category } from '../category/category.entity';
 import { CategoryService } from '../category/category.service';
+import { CloudinaryService } from './cloudinary.service';
 import { ProductController } from './product.controller';
 import { Product } from './product.entity';
 import { ProductService } from './product.service';
@@ -10,6 +11,6 @@ import { ProductService } from './product.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Product, Category])],
   controllers: [ProductController, CategoryController],
-  providers: [ProductService, CategoryService],
+  providers: [ProductService, CategoryService, CloudinaryService],
 })
 export class ProductModule {}

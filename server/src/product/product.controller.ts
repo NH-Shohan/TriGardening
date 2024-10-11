@@ -2,12 +2,18 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
   Param,
+  ParseFilePipe,
   ParseIntPipe,
   Patch,
   Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
@@ -27,8 +33,20 @@ export class ProductController {
   }
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.create(createProductDto);
+  @UseInterceptors(FileInterceptor('file'))
+  async create(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 5000000 }),
+          new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.productService.create(createProductDto, file);
   }
 
   @Patch(':id')
