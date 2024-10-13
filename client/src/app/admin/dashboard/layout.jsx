@@ -89,27 +89,34 @@ export default function DashboardLayout({ children }) {
               ))}
             </div>
           </div>
-          <div className="group/logout group/back transition-all">
-            <Separator className={"group-hover/back:opacity-0"} />
-            <SidebarLink
-              className={"hover/back:bg-blue-500/10 hover/back:text-blue-500"}
-              link={{
-                label: "Back to Home",
-                href: "/",
-                Icon: (
-                  <ArrowBendUpLeft className="w-6 h-6 hover/back:text-blue-500" />
-                ),
-              }}
-            />
-            <SidebarLink
-              className={"hover/logout:bg-red-500/10 hover/logout:text-red-500"}
-              onClick={handleLogout}
-              link={{
-                label: "Log Out",
-                href: "/admin",
-                Icon: <SignOut className="w-6 h-6 hover/logout:text-red-500" />,
-              }}
-            />
+
+          <div>
+            <Separator />
+            <div className="group/back">
+              <SidebarLink
+                className="hover:bg-blue-500/10 hover:text-blue-500"
+                link={{
+                  label: "Back to Home",
+                  href: "/",
+                  Icon: (
+                    <ArrowBendUpLeft className="w-6 h-6 group-hover/back:text-blue-500" />
+                  ),
+                }}
+              />
+            </div>
+            <div className="group/logout">
+              <SidebarLink
+                className="hover:bg-red-500/10 hover:text-red-500"
+                onClick={handleLogout}
+                link={{
+                  label: "Log Out",
+                  href: "/admin",
+                  Icon: (
+                    <SignOut className="w-6 h-6 group-hover/logout:text-red-500" />
+                  ),
+                }}
+              />
+            </div>
           </div>
         </SidebarBody>
       </Sidebar>

@@ -125,9 +125,9 @@ const TopVideos = ({ direction = "left", speed = "", pauseOnHover = true }) => {
             exit={{ opacity: 0 }}
           />
           <motion.div
-            className="fixed top-[20%] left-[20%] w-[60%] h-[60%] bg-neutral-50 rounded-3xl z-50 shadow-2xl p-2"
+            className="fixed top-[20%] left-[20%] w-[60%] xl:h-[60%] bg-neutral-50 rounded-3xl z-50 shadow-2xl p-2"
             initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1.4, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
           >
             <motion.iframe

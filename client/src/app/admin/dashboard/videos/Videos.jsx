@@ -1,5 +1,6 @@
 "use client";
 
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -117,7 +118,7 @@ const VideosPage = () => {
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="grid place-content-center gap-2 bg-neutral-50 text-green-600 border-2 border-dashed border-green-600 hover:bg-green-600/10 w-full h-full aspect-video">
+            <Button className="grid place-content-center gap-2 bg-neutral-50 text-green-600 border-2 border-dashed border-green-600 hover:bg-green-600/10 w-full h-full">
               <MonitorArrowUp
                 weight="light"
                 className="h-10 text-center w-full"
@@ -177,13 +178,13 @@ const VideosPage = () => {
 
         {videos.map((video, index) => (
           <div key={video.id} className="relative">
-            <div className="absolute top-4 right-5">
+            <div className="absolute top-3 right-4 z-50">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     size="icon"
-                    variant="outline"
-                    className="rounded-full bg-neutral-50"
+                    variant="secondary"
+                    className="rounded-full hover:bg-neutral-50"
                   >
                     <DotsThree className="h-4 w-4" />
                   </Button>
@@ -207,15 +208,20 @@ const VideosPage = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <iframe
-              className="rounded-xl aspect-video w-full border overflow-hidden"
-              src={video.src}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+            <AspectRatio
+              ratio={16 / 9}
+              className="rounded-xl overflow-hidden flex justify-center items-center"
+            >
+              <iframe
+                className="w-full border-none"
+                src={video.src}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </AspectRatio>
           </div>
         ))}
       </div>

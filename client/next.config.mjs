@@ -5,7 +5,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ["i.ibb.co.com", "randomuser.me"],
+    domains: ["i.ibb.co.com", "randomuser.me", "res.cloudinary.com"],
   },
   async rewrites() {
     return [

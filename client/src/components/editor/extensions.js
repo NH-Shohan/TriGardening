@@ -17,7 +17,6 @@ import {
   TiptapImage,
   TiptapLink,
   TiptapUnderline,
-  Twitter,
   Youtube,
 } from "novel/extensions";
 import { UploadImagesPlugin } from "novel/plugins";
@@ -129,13 +128,6 @@ const youtube = Youtube.configure({
   inline: false,
 });
 
-const twitter = Twitter.configure({
-  HTMLAttributes: {
-    class: cx("not-prose"),
-  },
-  inline: false,
-});
-
 const mathematics = Mathematics.configure({
   HTMLAttributes: {
     class: cx("text-foreground rounded p-1 hover:bg-accent cursor-pointer"),
@@ -169,7 +161,6 @@ export const defaultExtensions = [
   aiHighlight,
   codeBlockLowlight,
   youtube,
-  twitter,
   mathematics,
   characterCount,
   TiptapUnderline,

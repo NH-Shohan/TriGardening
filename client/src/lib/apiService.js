@@ -17,14 +17,11 @@ export const getProductById = async (id) => {
   }
 };
 
-export const updateProduct = async (id, data) => {
+export const updateProduct = async (id, formData) => {
   try {
     const response = await fetch(`${API_URL}/products/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData,
       credentials: "include",
     });
     if (!response.ok) throw new Error("Failed to update product");
@@ -34,13 +31,10 @@ export const updateProduct = async (id, data) => {
   }
 };
 
-export const postProduct = async (product) => {
+export const postProduct = async (formData) => {
   const response = await fetch(`${API_URL}/products`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(product),
+    body: formData,
     credentials: "include",
   });
   if (!response.ok) throw new Error("Failed to create article");

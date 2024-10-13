@@ -40,7 +40,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 
 const ArticleForm = ({ productId }) => {
   const [slug, setSlug] = useState("");
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [categories, setCategories] = useState([]);
@@ -62,8 +62,8 @@ const ArticleForm = ({ productId }) => {
     year: "numeric",
   }).format(new Date());
 
-  const handleFileUpload = (files) => {
-    setFiles(files);
+  const handleFileUpload = (uploadedFile) => {
+    setFile(uploadedFile);
   };
 
   const handleEditClick = () => {
@@ -87,13 +87,15 @@ const ArticleForm = ({ productId }) => {
           isEditing ? getProductById(productId) : Promise.resolve(null),
         ]);
 
+        console.log(productData);
+
         setCategories(fetchedCategories);
 
         if (productData) {
           setTitle(productData.title);
           setSlug(productData.slug);
-          setEditorContent(JSON.parse(productData.content || "{}"));
-          setFiles(productData.files || []);
+          setEditorContent(productData.content || "{}");
+          setFile(productData.file || []);
           setSelectedCategory(productData.category.name);
 
           const category = fetchedCategories.find(
@@ -137,26 +139,29 @@ const ArticleForm = ({ productId }) => {
     );
     const categoryId = selectedCategoryObj ? selectedCategoryObj.id : null;
 
-    const postData = {
-      title: title || "Untitled",
-      slug: slug || "untitled",
-      categoryId: categoryId || null,
-      files: files || [],
-      content: JSON.stringify(editorContent),
-      date: currentDate,
-      status: "visible",
-    };
+    const formData = new FormData();
+    formData.append("title", title || "Untitled");
+    formData.append("slug", slug || "untitled");
+    formData.append("categoryId", categoryId ? categoryId.toString() : "");
+    formData.append("content", JSON.stringify(editorContent));
+    formData.append("date", currentDate);
+    formData.append("status", "visible");
+
+    if (file) {
+      formData.append("file", file);
+    }
 
     try {
       if (isEditing) {
-        await updateProduct(productId, postData);
+        await updateProduct(productId, formData);
         toast.success("Article updated successfully!");
       } else {
-        await postProduct(postData);
+        await postProduct(formData);
         toast.success("Article created successfully!");
       }
       router.push("/admin/dashboard/articles");
     } catch (error) {
+      console.error("Error:", error);
       toast.error(
         isEditing ? "Error updating article!" : "Error posting article!"
       );
@@ -168,24 +173,36 @@ const ArticleForm = ({ productId }) => {
   }
 
   const handleSaveAsDraft = async () => {
-    const postData = {
-      title: title || "Untitled",
-      slug: slug || "untitled",
-      categoryId: null,
-      files: files || [],
-      content: content || "",
-      date: currentDate,
-      status: "draft",
-    };
+    const selectedCategoryObj = categories.find(
+      (category) => category.name === selectedCategory
+    );
+    const categoryId = selectedCategoryObj ? selectedCategoryObj.id : null;
+
+    const formData = new FormData();
+    formData.append("title", title || "Untitled");
+    formData.append("slug", slug || "untitled");
+    formData.append("categoryId", categoryId ? categoryId.toString() : "");
+    formData.append("content", JSON.stringify(editorContent));
+    formData.append("date", currentDate);
+    formData.append("status", "draft");
+
+    if (file) {
+      formData.append("file", file);
+    }
+
+    // const postData = {
+    //   title: title || "Untitled",
+    //   slug: slug || "untitled",
+    //   categoryId: null,
+    //   files: file || [],
+    //   content: content || "",
+    //   date: currentDate,
+    //   status: "draft",
+    // };
 
     try {
-      if (isEditing) {
-        await updateProduct(productId, postData);
-        toast.success("Article updated successfully!");
-      } else {
-        await postProduct(postData);
-        toast.success("Draft saved successfully!");
-      }
+      await updateProduct(productId, formData);
+      toast.success("Article updated successfully!");
       router.push("/admin/dashboard/articles");
     } catch (error) {
       toast.error("Error saving draft!");
@@ -193,7 +210,7 @@ const ArticleForm = ({ productId }) => {
   };
 
   const handleBack = () => {
-    if (title || slug || content || files.length > 0) {
+    if (title || slug || content) {
       setActionType("back");
       setDialogOpen(true);
     } else {
@@ -327,7 +344,7 @@ const ArticleForm = ({ productId }) => {
                 ? isEditing
                   ? "Save & Exit"
                   : "Post Article"
-                : "Save Draft"}
+                : "Save as Draft"}
             </Button>
           </DialogFooter>
         </DialogContent>

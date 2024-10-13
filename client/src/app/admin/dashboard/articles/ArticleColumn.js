@@ -60,10 +60,12 @@ export const columns = (handleDelete, handleStatus) => [
       <div className="w-[150px]">
         <AspectRatio ratio={3 / 2} className="bg-transparent">
           <Image
-            src={row.original.files.url || defaultImage}
-            className="rounded-xl h-auto w-auto  object-cover border"
+            src={row?.original?.files?.url || defaultImage}
+            className="rounded-xl h-auto w-auto object-cover border"
             alt="Image Article"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
           />
         </AspectRatio>
       </div>
@@ -75,7 +77,7 @@ export const columns = (handleDelete, handleStatus) => [
     cell: ({ row }) => (
       <div className="w-[400px]">
         <p className="text-base font-semibold text-ellipsis overflow-hidden text-nowrap">
-          {row.original.title}
+          {row?.original?.title}
         </p>
       </div>
     ),
@@ -93,7 +95,7 @@ export const columns = (handleDelete, handleStatus) => [
     ),
     cell: ({ row }) => (
       <span className="text-green-600 text-base">
-        {row.original.category.name}
+        {row?.original?.category?.name}
       </span>
     ),
   },
@@ -108,7 +110,7 @@ export const columns = (handleDelete, handleStatus) => [
         <ArrowsDownUp className="h-4 w-4" />
       </div>
     ),
-    cell: ({ row }) => <span className="text-base">{row.original.date}</span>,
+    cell: ({ row }) => <span className="text-sm">{row.original.date}</span>,
   },
   {
     accessorKey: "status",
@@ -168,7 +170,7 @@ export const columns = (handleDelete, handleStatus) => [
             <DropdownMenuContent align="end">
               <DropdownMenuItem className="gap-2 text-neutral-500" asChild>
                 <Link
-                  href={`/admin/dashboard/articles/${row.original.id}/edit`}
+                  href={`/admin/dashboard/articles/${row?.original?.id}/edit`}
                 >
                   <PencilSimpleLine className="h-4 w-4" />
                   Edit
@@ -177,7 +179,7 @@ export const columns = (handleDelete, handleStatus) => [
               <DropdownMenuItem
                 className="gap-2 text-neutral-500"
                 onClick={() => {
-                  handleStatus(row.original.id, row.original.status);
+                  handleStatus(row?.original?.id, row?.original?.status);
                 }}
               >
                 {row.original.status === "hidden" ? (

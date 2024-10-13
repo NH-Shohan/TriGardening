@@ -22,17 +22,9 @@ const mainVariant = {
   },
 };
 
-const secondaryVariant = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-  },
-};
-
 export const FileUpload = ({ onChange }) => {
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleFileChange = (newFiles) => {
@@ -51,8 +43,9 @@ export const FileUpload = ({ onChange }) => {
         url: URL.createObjectURL(acceptedFile),
       };
 
-      setFile(fileObject);
-      onChange && onChange(fileObject); // Pass the single file object
+      setFile(acceptedFile);
+      setPreview(fileObject);
+      onChange && onChange(acceptedFile);
     }
   };
 
@@ -62,9 +55,11 @@ export const FileUpload = ({ onChange }) => {
 
   const handleRemoveFile = () => {
     setFile(null);
+    setPreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+    onChange && onChange(null);
   };
 
   const { getRootProps, isDragActive } = useDropzone({
@@ -104,8 +99,8 @@ export const FileUpload = ({ onChange }) => {
             Drag or drop your files here or click to upload
           </p>
 
-          <div className="relative w-full mt-10 max-w-xl mx-auto">
-            {file && (
+          <div className="relative w-full max-w-xl mx-auto">
+            {preview && (
               <motion.div
                 key={"file-upload"}
                 layoutId={"file-upload"}
@@ -113,12 +108,12 @@ export const FileUpload = ({ onChange }) => {
                   "relative overflow-hidden z-40 bg-neutral-50 dark:bg-neutral-900 flex flex-col items-start justify-start md:h-auto p-4 mt-4 w-full mx-auto rounded-xl border"
                 )}
               >
-                <div className="flex justify-between w-full items-center gap-4">
-                  <div className="flex items-center gap-4">
+                <div className="flex justify-between w-full items-center gap-4 relative">
+                  <div className="space-y-2">
                     <Image
-                      src={file.url}
-                      alt={file.name}
-                      className="object-cover rounded-md"
+                      src={preview.url}
+                      alt={preview.name}
+                      className="object-cover rounded-lg w-full h-full aspect-video"
                       width={60}
                       height={0}
                     />
@@ -129,24 +124,24 @@ export const FileUpload = ({ onChange }) => {
                       layout
                       className="text-base text-neutral-700 dark:text-neutral-300 truncate max-w-xs"
                     >
-                      {file.name}
+                      {preview.name}
                     </motion.p>
                   </div>
                   <Button
                     variant="destructive"
-                    className="bg-red-100 text-red-500 hover:text-neutral-50 flex items-center gap-2"
+                    className="bg-red-100 text-red-500 hover:text-neutral-50 flex items-center gap-2 absolute top-3 right-3 w-11 p-0"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleRemoveFile();
                     }}
                   >
-                    <Trash className="w-5 h-5" />
+                    <Trash size={20} />
                   </Button>
                 </div>
               </motion.div>
             )}
 
-            {!file && (
+            {!preview && (
               <motion.div
                 layoutId="file-upload"
                 variants={mainVariant}

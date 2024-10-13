@@ -108,7 +108,7 @@ export function DataTable({ columns, data, loading }) {
               placeholder="Type article heading..."
               value={table.getColumn("title")?.getFilterValue() ?? ""}
               onChange={(event) =>
-                table.getColumn("title")?.setFilterValue(event.target.value)
+                table.getColumn("title")?.setFilterValue(event?.target?.value)
               }
               Icon={MagnifyingGlass}
             />
@@ -128,9 +128,9 @@ export function DataTable({ columns, data, loading }) {
                 <SelectItem value="all">All Category</SelectItem>
                 <SelectSeparator />
                 {Array.from(
-                  new Set(data.map((item) => item.category.name))
-                ).map((category) => (
-                  <SelectItem key={category} value={category}>
+                  new Set(data.map((item) => item?.category?.name))
+                ).map((category, index) => (
+                  <SelectItem key={index} value={category}>
                     {category}
                   </SelectItem>
                 ))}
@@ -151,7 +151,7 @@ export function DataTable({ columns, data, loading }) {
               <SelectContent>
                 <SelectItem value="all">All Status</SelectItem>
                 <SelectSeparator />
-                {Array.from(new Set(data.map((item) => item.status))).map(
+                {Array.from(new Set(data.map((item) => item?.status))).map(
                   (status) => (
                     <SelectItem key={status} value={status}>
                       {status}
@@ -186,8 +186,8 @@ export function DataTable({ columns, data, loading }) {
 
         <div className="flex items-center justify-between">
           <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
+            {table.getFilteredSelectedRowModel()?.rows?.length} of{" "}
+            {table.getFilteredRowModel()?.rows?.length} row(s) selected.
           </div>
 
           <div className="flex items-center space-x-2">
@@ -221,16 +221,16 @@ export function DataTable({ columns, data, loading }) {
         <div className="rounded-xl border overflow-hidden">
           <Table>
             <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
+              {table.getHeaderGroups().map((headerGroup, index) => (
+                <TableRow key={index}>
+                  {headerGroup?.headers.map((header, zindex) => {
                     return (
-                      <TableHead key={header.id}>
+                      <TableHead key={zindex}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
+                              header?.column?.columnDef?.header,
+                              header?.getContext()
                             )}
                       </TableHead>
                     );
@@ -240,15 +240,15 @@ export function DataTable({ columns, data, loading }) {
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
+                table.getRowModel().rows.map((row, index) => (
                   <TableRow
-                    key={row.id}
+                    key={index}
                     data-state={row.getIsSelected() && "selected"}
                   >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                    {row.getVisibleCells().map((cell, zindex) => (
+                      <TableCell key={zindex}>
                         {flexRender(
-                          cell.column.columnDef.cell,
+                          cell?.column?.columnDef?.cell,
                           cell.getContext()
                         )}
                       </TableCell>
