@@ -3,8 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Category } from '../category/category.entity';
 import { CloudinaryService } from './cloudinary.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './product.entity';
 
 @Injectable()
@@ -26,60 +24,68 @@ export class ProductService {
     });
   }
 
-  async create(createProductDto: CreateProductDto, file: Express.Multer.File) {
-    const { categoryId, ...productData } = createProductDto;
+  async create(createProductDto: any, file?: Express.Multer.File) {
+    console.log(
+      `Creating product with DTO: ${JSON.stringify(createProductDto)}`,
+    );
 
-    const uploadedImage = await this.cloudinaryService.uploadImage(file);
+    let uploadedImage = null;
+    if (file) {
+      uploadedImage = await this.cloudinaryService.uploadImage(file);
+    }
 
-    const category = await this.categoryRepo.findOne({
-      where: { id: categoryId },
-    });
+    const category = createProductDto.categoryId
+      ? await this.categoryRepo.findOne({
+          where: { id: parseInt(createProductDto.categoryId) },
+        })
+      : null;
 
     const product = this.productRepo.create({
-      ...productData,
+      ...createProductDto,
       category,
       files: uploadedImage,
+      content: createProductDto.content
+        ? JSON.parse(createProductDto.content)
+        : null,
     });
 
-    return this.productRepo.save(product);
+    try {
+      const savedProduct = await this.productRepo.save(product);
+      return savedProduct;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
+  async update(id: number, updateProductDto: any, file?: Express.Multer.File) {
     const product = await this.productRepo.findOne({
       where: { id },
+      relations: ['category'],
     });
 
     if (!product) {
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
 
-    if (updateProductDto.title) {
-      product.title = updateProductDto.title;
+    // Handle file upload if a new file is provided
+    if (file) {
+      const uploadedImage = await this.cloudinaryService.uploadImage(file);
+      product.file = uploadedImage;
     }
 
-    if (updateProductDto.slug) {
-      product.slug = updateProductDto.slug;
-    }
-
-    if (updateProductDto.status) {
-      product.status = updateProductDto.status;
-    }
-
-    if (updateProductDto.files) {
-      product.files = updateProductDto.files;
-    }
-
+    // Update other fields
+    if (updateProductDto.title) product.title = updateProductDto.title;
+    if (updateProductDto.slug) product.slug = updateProductDto.slug;
+    if (updateProductDto.status) product.status = updateProductDto.status;
+    if (updateProductDto.date) product.date = updateProductDto.date;
     if (updateProductDto.content) {
-      product.content = updateProductDto.content;
+      product.content = JSON.parse(updateProductDto.content);
     }
 
-    if (updateProductDto.date) {
-      product.date = updateProductDto.date;
-    }
-
+    // Handle category update
     if (updateProductDto.categoryId) {
       const category = await this.categoryRepo.findOne({
-        where: { id: updateProductDto.categoryId },
+        where: { id: parseInt(updateProductDto.categoryId) },
       });
       if (!category) {
         throw new NotFoundException(
@@ -89,9 +95,18 @@ export class ProductService {
       product.category = category;
     }
 
-    const savedProduct = await this.productRepo.save(product);
+    console.log(`Updating product: ${JSON.stringify(product)}`);
 
-    return savedProduct;
+    try {
+      const savedProduct = await this.productRepo.save(product);
+      console.log(
+        `Product updated successfully: ${JSON.stringify(savedProduct)}`,
+      );
+      return savedProduct;
+    } catch (error) {
+      console.error(`Error updating product: ${error.message}`, error.stack);
+      throw error;
+    }
   }
 
   async remove(id: string): Promise<void> {

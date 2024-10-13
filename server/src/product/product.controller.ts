@@ -14,8 +14,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
 
 @Controller('products')
@@ -35,26 +33,58 @@ export class ProductController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async create(
-    @Body() createProductDto: CreateProductDto,
+    @Body() createProductDto: any,
     @UploadedFile(
       new ParseFilePipe({
         validators: [
           new MaxFileSizeValidator({ maxSize: 5000000 }),
           new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
         ],
+        fileIsRequired: false,
       }),
     )
-    file: Express.Multer.File,
+    file?: Express.Multer.File,
   ) {
-    return this.productService.create(createProductDto, file);
+    try {
+      const result = await this.productService.create(createProductDto, file);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Patch(':id')
-  update(
+  @UseInterceptors(FileInterceptor('file'))
+  async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateProductDto: UpdateProductDto,
+    @Body() updateProductDto: any,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 5000000 }),
+          new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/ }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    file?: Express.Multer.File,
   ) {
-    return this.productService.update(id, updateProductDto);
+    console.log(
+      `Updating product ${id} with DTO: ${JSON.stringify(updateProductDto)}`,
+    );
+    console.log(`Received file: ${file ? file.originalname : 'No file'}`);
+
+    try {
+      const result = await this.productService.update(
+        id,
+        updateProductDto,
+        file,
+      );
+      return result;
+    } catch (error) {
+      console.error(`Error updating product: ${error.message}`, error.stack);
+      throw error;
+    }
   }
 
   @Delete(':id')

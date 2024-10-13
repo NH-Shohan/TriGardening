@@ -3,6 +3,8 @@ import { Category } from '../category/category.entity';
 
 @Entity()
 export class Product {
+  product: unknown;
+  [x: string]: unknown;
   @PrimaryGeneratedColumn()
   id: number;
 
